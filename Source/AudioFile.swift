@@ -9,12 +9,39 @@
 import Foundation
 import AudioToolbox
 
+/// A Swift wrapper around Audio File Services' `AudioFileID`.
 public class AudioFile {
 
+    /// A COpaquePointer that references an `AudioFileID`.
     public var audioFileID: AudioFileID
     
-    public init() {
-        self.audioFileID = nil
+    /// Initialize the `AudioFile` with the given `AudioFileID`.
+    public init(audioFileID: AudioFileID) {
+        self.audioFileID = audioFileID
+    }
+    
+    /// Initialize an `AudioFile` with an empty `AudioFileID`.
+    public convenience init() {
+        self.init(audioFileID: nil)
+    }
+    
+    /// Initialize an `AudioFile` with an audio file at the provided URL.
+    public convenience init(
+        url: NSURL,
+        permissions: AudioFilePermissions,
+        fileTypeHint: AudioFileType? = nil) throws {
+        
+        var audioFileID: AudioFileID = nil
+        
+        try Error.check(
+            AudioFileOpenURL(
+                url,
+                permissions,
+                fileTypeHint?.code ?? 0,
+                &audioFileID),
+            message: "Failed to open file at url \(url).")
+        
+        self.init(audioFileID: audioFileID)
     }
 
     // MARK: Creating and Initializing Audio Files
