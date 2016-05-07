@@ -13,7 +13,7 @@ import AudioToolbox
 public class AudioFile {
 
     /// A COpaquePointer that references an `AudioFileID`.
-    var audioFileID: AudioFileID
+    public var audioFileID: AudioFileID
     
     /// Initialize an `AudioFile` with an empty `AudioFileID`.
     public convenience init() {
@@ -65,6 +65,14 @@ public class AudioFile {
     
     // MARK: Opening and Closing Audio Files
     
+    /// Close the `AudioFile`.
+    public func close() throws {
+        
+        try Error.check(
+            AudioFileClose(self.audioFileID),
+            message: "Failed to close file.")
+    }
+    
     /**
     
      Open an audio file at the provided URL.
@@ -102,6 +110,26 @@ public class AudioFile {
         return self
     }
     
+    /**
+    
+    Open an `AudioFile` with callbacks for reading and/or writing audio data.
+    
+    - parameters:
+      - inClientData: A void pointer to a data object that will be passed to the
+      callback functions.
+      - inReadFunc: A callback used to read data from an audio file.
+      - inWriteFunc: A callback used to write data to an audio file. Pass `nil`
+      for this parameter if you only intend to use read access.
+      - inGetSizeFunc: A callback used to get the size of the audio file.
+      - inSetSizeFunc: A callback used to set the size of the audio file. Pass `nil`
+      for this parameter if you only intend to use read access.
+      - inFormat: A mutable pointer to the audio file's `AudioStreamBasicDescription`.
+      - inFileTypeHint: The `AudioFileType` of the audio file. Pass `nil` to provide
+      no file type hint.
+      
+    - returns: The opened `AudioFile` with assigned callbacks.
+    - throws: `AudioFileError`
+    */
     public func openWithCallbacks(
         inClientData inClientData: UnsafeMutablePointer<Void>,
         inReadFunc: AudioFile_ReadProc,
@@ -109,7 +137,7 @@ public class AudioFile {
         inGetSizeFunc: AudioFile_GetSizeProc,
         inSetSizeFunc: AudioFile_SetSizeProc?,
         inFormat: UnsafeMutablePointer<AudioStreamBasicDescription>,
-        inFileTypeHint: AudioFileType) throws -> AudioFile {
+        inFileTypeHint: AudioFileType?) throws -> AudioFile {
         
         try Error.check(
             AudioFileOpenWithCallbacks(
@@ -118,19 +146,11 @@ public class AudioFile {
                 inWriteFunc,
                 inGetSizeFunc,
                 inSetSizeFunc,
-                inFileTypeHint.code,
+                inFileTypeHint?.code ?? 0,
                 &self.audioFileID),
             message: "Failed to initialize file with callbacks.")
         
         return self
-    }
-    
-    /// Close the `AudioFile`.
-    public func close() throws {
-        
-        try Error.check(
-            AudioFileClose(self.audioFileID),
-            message: "Failed to close file.")
     }
 
 //    // MARK: Property Information
