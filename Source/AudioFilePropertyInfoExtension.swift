@@ -13,7 +13,7 @@ extension AudioFile {
     
     // MARK: AudioFile Property Information
     
-    public typealias PropertyInfo = (size: Int, writable: Bool)
+    public typealias PropertyInfo = (size: UInt32, writable: Bool)
 
     public func propertyInfo(property: AudioFileProperty) throws -> PropertyInfo {
         
@@ -26,12 +26,12 @@ extension AudioFile {
                 , property.code
                 , &size
                 , &isWritable)
-            , message: "Failed to determine if property is writable for property \(property.rawValue).")
+            , message: "Failed to get PropertyInfo for property \(property.shortDescription).")
         
-        return (Int(size), isWritable == 1)
+        return (size, isWritable == 1)
     }
 
-    public func propertySize(property: AudioFileProperty) throws -> Int {
+    public func propertySize(property: AudioFileProperty) throws -> UInt32 {
         return try propertyInfo(property).size
     }
 
