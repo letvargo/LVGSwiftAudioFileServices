@@ -80,4 +80,14 @@ class AudioFileCreationTests: XCTestCase {
             XCTFail("Error thrown.")
         }
     }
+    
+    func testInfoDictionary() {
+        do {
+            try audioFile.open(frog, permissions: .ReadPermission, fileTypeHint: .AIFF)
+            _ = try audioFile.infoDictionary()
+        } catch {
+            print("\(error)")
+            XCTFail("Could not access infoDictionary property.")
+        }
+    }
 }

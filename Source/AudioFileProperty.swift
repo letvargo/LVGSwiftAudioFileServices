@@ -31,14 +31,14 @@ public enum AudioFileProperty: CodedPropertyType {
     case ChunkIDs
     case PacketTableInfo
     case PacketSizeUpperBound
-//    case InfoDictionary(NSDictionary?)
-//    case ReserveDuration(Double?)
-//    case EstimatedDuration(Double?)
-//    case BitRate(UInt32?)
-//    case ID3Tag(NSData?)
-//    case SourceBitDepth(Int32?)
-//    case AlbumArtwork(NSData?)
-//    case AudioTrackCount(UInt32?)
+    case InfoDictionary
+    case ReserveDuration
+    case EstimatedDuration
+    case BitRate
+    case ID3Tag
+    case SourceBitDepth
+    case AlbumArtwork
+    case AudioTrackCount
 //    case UseAudioTrack(UInt32?)
     
     public var domain: String {
@@ -85,24 +85,24 @@ public enum AudioFileProperty: CodedPropertyType {
             return "Chunk IDs"
         case .PacketTableInfo:
             return "Packet table info"
-//        case .InfoDictionary(_):
-//            return ("Info Dictionary", kAudioFilePropertyInfoDictionary)
+        case .InfoDictionary(_):
+            return "Info dictionary"
         case .PacketSizeUpperBound:
             return "Packet size upper bound"
-//        case .ReserveDuration(_):
-//            return ("Reserve Duration", kAudioFilePropertyReserveDuration)
-//        case .EstimatedDuration(_):
-//            return ("Estimated Duration", kAudioFilePropertyEstimatedDuration)
-//        case .BitRate(_):
-//            return ("Bit Rate", kAudioFilePropertyBitRate)
-//        case .ID3Tag(_):
-//            return ("ID3 Tag", kAudioFilePropertyID3Tag)
-//        case .SourceBitDepth(_):
-//            return ("Source Bit Depth", kAudioFilePropertySourceBitDepth)
-//        case .AlbumArtwork(_):
-//            return ("Album Artwork", kAudioFilePropertyAlbumArtwork)
-//        case .AudioTrackCount(_):
-//            return ("Audio Track Count", kAudioFilePropertyAudioTrackCount)
+        case .ReserveDuration:
+            return "Reserve duration"
+        case .EstimatedDuration:
+            return "Estimated duration"
+        case .BitRate:
+            return "Bit rate"
+        case .ID3Tag:
+            return "ID3 tag"
+        case .SourceBitDepth:
+            return "Source bit depth"
+        case .AlbumArtwork:
+            return "Album artwork"
+        case .AudioTrackCount:
+            return "Audio track count"
 //        case .UseAudioTrack(_):
 //            return ("Use Audio Track", kAudioFilePropertyUseAudioTrack)
         }
@@ -150,6 +150,22 @@ public enum AudioFileProperty: CodedPropertyType {
             return kAudioFilePropertyPacketTableInfo
         case .PacketSizeUpperBound:
             return kAudioFilePropertyPacketSizeUpperBound
+        case .InfoDictionary:
+            return kAudioFilePropertyInfoDictionary
+        case .AlbumArtwork:
+            return kAudioFilePropertyAlbumArtwork
+        case .ReserveDuration:
+            return kAudioFilePropertyReserveDuration
+        case .EstimatedDuration:
+            return kAudioFilePropertyEstimatedDuration
+        case .BitRate:
+            return kAudioFilePropertyBitRate
+        case .ID3Tag:
+            return kAudioFilePropertyID3Tag
+        case .SourceBitDepth:
+            return kAudioFilePropertySourceBitDepth
+        case .AudioTrackCount:
+            return kAudioFilePropertyAudioTrackCount
         }
     }
     
@@ -195,6 +211,22 @@ public enum AudioFileProperty: CodedPropertyType {
             self = .PacketTableInfo
         case kAudioFilePropertyPacketSizeUpperBound:
             self = .PacketSizeUpperBound
+        case kAudioFilePropertyInfoDictionary:
+            self = .InfoDictionary
+        case kAudioFilePropertyAlbumArtwork:
+            self = .AlbumArtwork
+        case kAudioFilePropertyReserveDuration:
+            self = .ReserveDuration
+        case kAudioFilePropertyEstimatedDuration:
+            self = .EstimatedDuration
+        case kAudioFilePropertyBitRate:
+            self = .BitRate
+        case kAudioFilePropertyID3Tag:
+            self = .ID3Tag
+        case kAudioFilePropertySourceBitDepth:
+            self = .SourceBitDepth
+        case kAudioFilePropertyAudioTrackCount:
+            self = .AudioTrackCount
         default:
             return nil
         }
