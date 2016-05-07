@@ -12,8 +12,12 @@ import AudioToolbox
 /// A Swift wrapper around Audio File Services' `AudioFileID`.
 public class AudioFile {
 
+    // MARK: AudioFile properties
+
     /// A COpaquePointer that references an `AudioFileID`.
     public var audioFileID: AudioFileID
+    
+    // MARK: AudioFile initializers
     
     /// Initialize an `AudioFile` with an empty `AudioFileID`.
     public convenience init() {
@@ -24,44 +28,6 @@ public class AudioFile {
     public init(audioFileID: AudioFileID) {
         self.audioFileID = audioFileID
     }
-
-    // MARK: Creating and Initializing Audio Files
-
-//    public func initializeWithCallbacks(
-//        inClientData inClientData: UnsafeMutablePointer<Void>,
-//        inReadFunc: AudioFile_ReadProc,
-//        inWriteFunc: AudioFile_WriteProc,
-//        inGetSizeFunc: AudioFile_GetSizeProc,
-//        inSetSizeFunc: AudioFile_SetSizeProc,
-//        inFileType: AudioFileType,
-//        inFormat: UnsafeMutablePointer<AudioStreamBasicDescription>,
-//        inFlags: AudioFileFlags) throws {
-//
-//        try Error.check(
-//            AudioFileInitializeWithCallbacks(
-//                inClientData
-//                , inReadFunc
-//                , inWriteFunc
-//                , inGetSizeFunc
-//                , inSetSizeFunc
-//                , inFileType.code
-//                , inFormat
-//                , inFlags
-//                , &self.audioFileID)
-//            , message: "Failed to initialize file with callbacks.")
-//    }
-
-//    mutating public func createWithURL(url: NSURL, fileType: AudioFileType, inout format: AudioStreamBasicDescription, flags: AudioFileFlags) throws {
-//        
-//        try Error.check(
-//            AudioFileCreateWithURL(
-//                url,
-//                fileType.code,
-//                &format,
-//                flags,
-//                &ptr),
-//            message: "Failed to create file at url \(url).")
-    //    }
     
     // MARK: Opening and Closing Audio Files
     
@@ -71,6 +37,49 @@ public class AudioFile {
         try Error.check(
             AudioFileClose(self.audioFileID),
             message: "Failed to close file.")
+    }
+    
+    /// Create an audio file at the provided URL.
+    public func createWithURL(
+        url: NSURL,
+        fileType: AudioFileType,
+        inout format: AudioStreamBasicDescription,
+        flags: AudioFileFlags) throws {
+        
+        try Error.check(
+            AudioFileCreateWithURL(
+                url,
+                fileType.code,
+                &format,
+                flags,
+                &self.audioFileID),
+            message: "Failed to create file at url \(url).")
+    }
+    
+    /// Erase and initialize an audio file with callbacks for reading
+    /// and writing audio data.
+    public func initializeWithCallbacks(
+        inClientData inClientData: UnsafeMutablePointer<Void>,
+        inReadFunc: AudioFile_ReadProc,
+        inWriteFunc: AudioFile_WriteProc,
+        inGetSizeFunc: AudioFile_GetSizeProc,
+        inSetSizeFunc: AudioFile_SetSizeProc,
+        inFileType: AudioFileType,
+        inout inFormat: AudioStreamBasicDescription,
+        inFlags: AudioFileFlags) throws {
+        
+        try Error.check(
+            AudioFileInitializeWithCallbacks(
+                inClientData,
+                inReadFunc,
+                inWriteFunc,
+                inGetSizeFunc,
+                inSetSizeFunc,
+                inFileType.code,
+                &inFormat,
+                inFlags,
+                &self.audioFileID),
+            message: "Failed to initialize file with callbacks.")
     }
     
     /**
@@ -111,32 +120,29 @@ public class AudioFile {
     }
     
     /**
-    
-    Open an `AudioFile` with callbacks for reading and/or writing audio data.
-    
-    - parameters:
-      - inClientData: A void pointer to a data object that will be passed to the
-      callback functions.
-      - inReadFunc: A callback used to read data from an audio file.
-      - inWriteFunc: A callback used to write data to an audio file. Pass `nil`
-      for this parameter if you only intend to use read access.
-      - inGetSizeFunc: A callback used to get the size of the audio file.
-      - inSetSizeFunc: A callback used to set the size of the audio file. Pass `nil`
-      for this parameter if you only intend to use read access.
-      - inFormat: A mutable pointer to the audio file's `AudioStreamBasicDescription`.
-      - inFileTypeHint: The `AudioFileType` of the audio file. Pass `nil` to provide
-      no file type hint.
-      
-    - returns: The opened `AudioFile` with assigned callbacks.
-    - throws: `AudioFileError`
-    */
+     
+     Open an `AudioFile` with callbacks for reading and/or writing audio data.
+     
+     - parameters:
+       - inClientData: A void pointer to a data object that will be passed to the
+     callback functions.
+       - inReadFunc: A callback used to read data from an audio file.
+       - inWriteFunc: A callback used to write data to an audio file. Pass `nil`
+       for this parameter if you only intend to use read access.
+       - inGetSizeFunc: A callback used to get the size of the audio file.
+       - inSetSizeFunc: A callback used to set the size of the audio file. Pass `nil`
+       for this parameter if you only intend to use read access.
+       - inFileTypeHint: The `AudioFileType` of the audio file. Pass `nil` to provide
+       no file type hint.
+     - returns: The opened `AudioFile` with assigned callbacks.
+     - throws: `AudioFileError`
+     */
     public func openWithCallbacks(
         inClientData inClientData: UnsafeMutablePointer<Void>,
         inReadFunc: AudioFile_ReadProc,
         inWriteFunc: AudioFile_WriteProc?,
         inGetSizeFunc: AudioFile_GetSizeProc,
         inSetSizeFunc: AudioFile_SetSizeProc?,
-        inFormat: UnsafeMutablePointer<AudioStreamBasicDescription>,
         inFileTypeHint: AudioFileType?) throws -> AudioFile {
         
         try Error.check(
@@ -243,11 +249,12 @@ public class AudioFile {
 //            , message: "Failed to write packets.")
 //    }
 //    
-//    // MARK: Optimizing
-//    
-//    public func optimize() throws {
-//        try Error.check(
-//            AudioFileOptimize(ptr)
-//            , message: "Failed to optimize audio file.")
-//    }
+    // MARK: Optimizing
+    
+    public func optimize() throws {
+    
+        try Error.check(
+            AudioFileOptimize(self.audioFileID),
+            message: "Failed to optimize audio file.")
+    }
 }

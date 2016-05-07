@@ -11,6 +11,18 @@ import XCTest
 import LVGSwiftAudioFileServices
 import AudioToolbox
 
+
+
+let readProc: AudioFile_ReadProc = {
+    inClientData, inPosition, requestCount, buffer, actualCount in
+    return 0
+}
+
+let writeProc: AudioFile_WriteProc = {
+    inClientData, inPosition, requestCount, buffer, actualCount in
+    return 0
+}
+
 class AudioFileCreationTests: XCTestCase {
 
     var audioFile: AudioFile!
