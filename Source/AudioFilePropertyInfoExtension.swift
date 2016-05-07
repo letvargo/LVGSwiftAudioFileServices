@@ -12,38 +12,30 @@ import AudioToolbox
 extension AudioFile {
     
     // MARK: AudioFile Property Information
+    
+    public typealias PropertyInfo = (size: Int, writable: Bool)
 
-    public func propertyInfo(property: AudioFileProperty) throws -> (UInt32, Bool) {
-        return (try getPropertySize(property), try getPropertyIsWritable(property))
-    }
-
-    public func propertySize(property: AudioFileProperty) throws -> UInt32 {
-
-        var size: UInt32 = 0
-
-        try Error.check(
-              AudioFileGetPropertyInfo(
-                  self.ptr
-                , property.code
-                , &size
-                , nil)
-            , message: "Failed to get property size for property \(property.rawValue).")
-
-        return size
-    }
-
-    public func propertyIsWritable(property: AudioFileProperty) throws -> Bool {
-
+    public func propertyInfo(property: AudioFileProperty) throws -> PropertyInfo {
+        
         var isWritable: UInt32 = 0
-
+        var size: UInt32 = 0
+        
         try Error.check(
             AudioFileGetPropertyInfo(
-                self.ptr
+                self.audioFileID
                 , property.code
-                , nil
+                , &size
                 , &isWritable)
             , message: "Failed to determine if property is writable for property \(property.rawValue).")
         
-        return isWritable == 1
+        return (Int(size), isWritable == 1)
+    }
+
+    public func propertySize(property: AudioFileProperty) throws -> Int {
+        return try propertyInfo(property).size
+    }
+
+    public func propertyIsWritable(property: AudioFileProperty) throws -> Bool {
+        return try propertyInfo(property).writable
     }
 }
