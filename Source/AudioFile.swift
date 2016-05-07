@@ -13,35 +13,16 @@ import AudioToolbox
 public class AudioFile {
 
     /// A COpaquePointer that references an `AudioFileID`.
-    public var audioFileID: AudioFileID
-    
-    /// Initialize the `AudioFile` with the given `AudioFileID`.
-    public init(audioFileID: AudioFileID) {
-        self.audioFileID = audioFileID
-    }
+    var audioFileID: AudioFileID
     
     /// Initialize an `AudioFile` with an empty `AudioFileID`.
     public convenience init() {
         self.init(audioFileID: nil)
     }
     
-    /// Initialize an `AudioFile` with an audio file at the provided URL.
-    public convenience init(
-        url: NSURL,
-        permissions: AudioFilePermissions,
-        fileTypeHint: AudioFileType? = nil) throws {
-        
-        var audioFileID: AudioFileID = nil
-        
-        try Error.check(
-            AudioFileOpenURL(
-                url,
-                permissions,
-                fileTypeHint?.code ?? 0,
-                &audioFileID),
-            message: "Failed to open file at url \(url).")
-        
-        self.init(audioFileID: audioFileID)
+    /// Initialize an `AudioFile` with the provided `AudioFileID`.
+    public init(audioFileID: AudioFileID) {
+        self.audioFileID = audioFileID
     }
 
     // MARK: Creating and Initializing Audio Files
@@ -84,7 +65,31 @@ public class AudioFile {
     
     // MARK: Opening and Closing Audio Files
     
-    public func open(url: NSURL, permissions: AudioFilePermissions, fileTypeHint: AudioFileType? = nil) throws {
+    /**
+    
+     Open an audio file at the provided URL.
+     
+     This method returns `self` to allow for method chaining:
+    
+         let audioFile = try AudioFile().open(myURL, permissions: .ReadPermissions)
+     
+     - parameters:
+       - url: The URL of the file you wish to open.
+       - permissions: Read, write, or read-write permissions.
+       - fileTypeHint: A hint for the type of the audio file you are opening.
+       The default value is `nil` and this should be used if you do not know
+       the file type.
+    
+     - returns: This method opens the file and returns `self` in order to
+     allow method chaining.
+         
+     - throws: `AudioFileError`
+     
+     */
+    public func open(
+        url: NSURL,
+        permissions: AudioFilePermissions,
+        fileTypeHint: AudioFileType? = nil) throws -> AudioFile {
         
         try Error.check(
             AudioFileOpenURL(
@@ -93,29 +98,41 @@ public class AudioFile {
                 fileTypeHint?.code ?? 0,
                 &self.audioFileID),
             message: "Failed to open file at url \(url).")
+        
+        return self
     }
     
-//    mutating public func openWithCallbacks(inClientData inClientData: UnsafeMutablePointer<Void>, inReadFunc: AudioFile_ReadProc, inWriteFunc: AudioFile_WriteProc?, inGetSizeFunc: AudioFile_GetSizeProc, inSetSizeFunc: AudioFile_SetSizeProc?, inFileTypeHint: AudioFileType = .None, inFormat: UnsafeMutablePointer<AudioStreamBasicDescription>) throws {
-//        
-//        try Error.check(
-//            AudioFileOpenWithCallbacks(
-//                inClientData
-//                , inReadFunc
-//                , inWriteFunc
-//                , inGetSizeFunc
-//                , inSetSizeFunc
-//                , inFileTypeHint.code
-//                , &ptr)
-//            , message: "Failed to initialize file with callbacks.")
-//    }
-//    
-//    public func close() throws {
-//        
-//        try Error.check(
-//              AudioFileClose(ptr)
-//            , message: "Failed to close file.")
-//    }
-//
+    public func openWithCallbacks(
+        inClientData inClientData: UnsafeMutablePointer<Void>,
+        inReadFunc: AudioFile_ReadProc,
+        inWriteFunc: AudioFile_WriteProc?,
+        inGetSizeFunc: AudioFile_GetSizeProc,
+        inSetSizeFunc: AudioFile_SetSizeProc?,
+        inFormat: UnsafeMutablePointer<AudioStreamBasicDescription>,
+        inFileTypeHint: AudioFileType) throws -> AudioFile {
+        
+        try Error.check(
+            AudioFileOpenWithCallbacks(
+                inClientData,
+                inReadFunc,
+                inWriteFunc,
+                inGetSizeFunc,
+                inSetSizeFunc,
+                inFileTypeHint.code,
+                &self.audioFileID),
+            message: "Failed to initialize file with callbacks.")
+        
+        return self
+    }
+    
+    /// Close the `AudioFile`.
+    public func close() throws {
+        
+        try Error.check(
+            AudioFileClose(self.audioFileID),
+            message: "Failed to close file.")
+    }
+
 //    // MARK: Property Information
 //    
 //    public func getPropertyInfo(property: AudioFileProperty) throws -> (UInt32, Bool) {
