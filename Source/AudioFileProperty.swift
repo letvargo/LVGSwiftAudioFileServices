@@ -39,7 +39,7 @@ public enum AudioFileProperty: CodedPropertyType {
     case SourceBitDepth
     case AlbumArtwork
     case AudioTrackCount
-//    case UseAudioTrack(UInt32?)
+    case UseAudioTrack
     
     public var domain: String {
         return "Audio File Services Property"
@@ -103,8 +103,8 @@ public enum AudioFileProperty: CodedPropertyType {
             return "Album artwork"
         case .AudioTrackCount:
             return "Audio track count"
-//        case .UseAudioTrack(_):
-//            return ("Use Audio Track", kAudioFilePropertyUseAudioTrack)
+        case .UseAudioTrack:
+            return "Use audio track"
         }
     }
     
@@ -166,6 +166,8 @@ public enum AudioFileProperty: CodedPropertyType {
             return kAudioFilePropertySourceBitDepth
         case .AudioTrackCount:
             return kAudioFilePropertyAudioTrackCount
+        case .UseAudioTrack:
+            return kAudioFilePropertyUseAudioTrack
         }
     }
     
@@ -227,6 +229,8 @@ public enum AudioFileProperty: CodedPropertyType {
             self = .SourceBitDepth
         case kAudioFilePropertyAudioTrackCount:
             self = .AudioTrackCount
+        case kAudioFilePropertyUseAudioTrack:
+            self = .UseAudioTrack
         default:
             return nil
         }
