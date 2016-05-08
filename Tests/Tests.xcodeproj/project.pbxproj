@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		575174CC1CDEDCE00019E792 /* AudioFileErrorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 575174CB1CDEDCE00019E792 /* AudioFileErrorTests.swift */; };
+		575174CD1CDEDCE00019E792 /* AudioFileErrorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 575174CB1CDEDCE00019E792 /* AudioFileErrorTests.swift */; };
 		57CC08FB1CDA1C8600253BF3 /* AudioFileCreationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57CC08FA1CDA1C8600253BF3 /* AudioFileCreationTests.swift */; };
 		57CC08FC1CDA1C8600253BF3 /* AudioFileCreationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57CC08FA1CDA1C8600253BF3 /* AudioFileCreationTests.swift */; };
 		C3B373EB6940036D29B25F38 /* Pods_Tests_OSX.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D16300CC7E36E0B32DE7855A /* Pods_Tests_OSX.framework */; };
@@ -16,6 +18,7 @@
 /* Begin PBXFileReference section */
 		0AD33BE38D234006B9428B73 /* Pods-Tests-OSX.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Tests-OSX.release.xcconfig"; path = "Pods/Target Support Files/Pods-Tests-OSX/Pods-Tests-OSX.release.xcconfig"; sourceTree = "<group>"; };
 		0F1391B81FA5291C52FF78C1 /* Pods_Tests_iOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Tests_iOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		575174CB1CDEDCE00019E792 /* AudioFileErrorTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AudioFileErrorTests.swift; path = TestFiles/AudioFileErrorTests.swift; sourceTree = "<group>"; };
 		57CC08DD1CD9C95900253BF3 /* Tests-iOS.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Tests-iOS.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		57CC08E21CD9C95A00253BF3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		57CC08EA1CD9C98B00253BF3 /* Tests-OSX.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Tests-OSX.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -97,6 +100,7 @@
 			isa = PBXGroup;
 			children = (
 				57CC08FA1CDA1C8600253BF3 /* AudioFileCreationTests.swift */,
+				575174CB1CDEDCE00019E792 /* AudioFileErrorTests.swift */,
 			);
 			name = Tests;
 			sourceTree = "<group>";
@@ -306,6 +310,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				57CC08FB1CDA1C8600253BF3 /* AudioFileCreationTests.swift in Sources */,
+				575174CC1CDEDCE00019E792 /* AudioFileErrorTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -314,6 +319,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				57CC08FC1CDA1C8600253BF3 /* AudioFileCreationTests.swift in Sources */,
+				575174CD1CDEDCE00019E792 /* AudioFileErrorTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
