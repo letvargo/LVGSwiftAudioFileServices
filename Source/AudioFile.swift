@@ -6,7 +6,6 @@
 //  Copyright © 2016 letvargo. All rights reserved.
 //
 
-import Foundation
 import AudioToolbox
 
 /// A Swift wrapper around Audio File Services' `AudioFileID`.

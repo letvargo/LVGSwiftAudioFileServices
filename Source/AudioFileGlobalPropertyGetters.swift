@@ -7,7 +7,6 @@
 //
 
 import Foundation
-import LVGSwiftAudioFileServices
 import AudioToolbox
 
 extension AudioFile {
