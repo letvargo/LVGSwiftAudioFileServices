@@ -9,12 +9,11 @@
 import Foundation
 import AudioToolbox
 
-
 extension AudioFile {
 
     public func infoForKey(key: AudioFileInfoKey) throws -> NSString? {
         
-        return infoDictionary?[key.code] as? NSString
+        return try infoDictionary()[key.code] as? NSString
     }
 }
 
@@ -46,8 +45,7 @@ public enum AudioFileInfoKey: String, CustomStringConvertible {
     case Subtitle
     
     public var description: String {
-        
-        return "Audio File Info Key \(rawValue). Code: \(code)"
+        return "Audio File Info Key '\(rawValue)'. Code: '\(code)'"
     }
 
     public var code: String {
