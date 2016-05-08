@@ -105,7 +105,7 @@ extension AudioFile {
     }
     
     public func fileType() throws -> AudioFileType {
-        var typeID: AudioFileTypeID = try self.fileFormat()
+        let typeID: AudioFileTypeID = try self.fileFormat()
         guard let fileType = AudioFileType(code: typeID) else {
             throw AudioFileError(
                 status: Int32.max,

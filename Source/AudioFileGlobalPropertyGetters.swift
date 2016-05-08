@@ -183,7 +183,7 @@ extension AudioFile {
     }
     
     public static func readableTypes() throws -> [UInt32] {
-        var size = try AudioFile.globalPropertySize(.ReadableTypes)
+        let size = try AudioFile.globalPropertySize(.ReadableTypes)
         var types = [AudioFileTypeID](count: Int(size) / sizeof(AudioFileTypeID), repeatedValue: 0)
         try AudioFile.property(.ReadableTypes, buffer: &types, size: size)
         return types
@@ -263,7 +263,7 @@ extension AudioFile {
         let size = try AudioFile.globalPropertySize(
             .UTIsForType,
             specifierSize: specifierSize,
-            specifier: &specifier )
+            specifier: &specifier)
         var UTIs = NSArray()
         try AudioFile.property(
             .UTIsForType,
