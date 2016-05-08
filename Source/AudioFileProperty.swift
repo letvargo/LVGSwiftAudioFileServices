@@ -9,8 +9,17 @@
 import AudioToolbox
 import LVGUtilities
 
+/**
+ An enum with cases that correspond to the audio file property constants defined by
+ Audio File Services.
+ 
+ For more information about these properties and the constants that identify
+ them, see the official [Apple Audio File Services documentation](https://developer.apple.com/library/mac/documentation/MusicAudio/Reference/AudioFileConvertRef/index.html#//apple_ref/doc/uid/TP40006072).
+ */
+
 public enum AudioFileProperty: CodedPropertyType {
     
+    /// The equivalent of kAudioFilePropertyFileFormat
     case FileFormat
     case DataFormat
     case FormatList

@@ -12,15 +12,12 @@ import LVGUtilities
 // MARK: Audio File Services Global Properties
 
 /**
- 
  An enum with cases that correspond to the global property constants defined by
  Audio File Services.
  
  For more information about these properties and the constants that identify
  them, see the official [Apple Audio File Services documentation](https://developer.apple.com/library/mac/documentation/MusicAudio/Reference/AudioFileConvertRef/index.html#//apple_ref/doc/uid/TP40006072).
- 
  */
-
 public enum AudioFileGlobalProperty: CodedPropertyType {
     
     /// The equivalent of kAudioFileGlobalInfo_AllExtensions
