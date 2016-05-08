@@ -60,12 +60,19 @@ extension AudioFile {
     }
     
     /// Get a list off all audio file extensions.
+    ///
+    /// - returns: A `[String]` that contains all available audio file extensions.
+    /// - throws: `AudioFileError`
     public static func allExtensions() throws -> [String] {
         var extensions = NSArray()
         try AudioFile.property(.AllExtensions, buffer: &extensions)
         return extensions.flatMap { $0 as? String }
     }
     
+    /// Get a list of all HFS type codes.
+    ///
+    /// - returns: A `[FourCharCode]` that contains all available HFS type codes.
+    /// - throws: `AudioFileError`
     public static func allHFSTypeCodes() throws -> [FourCharCode] {
         let size = try AudioFile.globalPropertySize(.AllHFSTypeCodes)
         var codes = [FourCharCode](count: Int(size) / sizeof(FourCharCode), repeatedValue: 0)
@@ -73,18 +80,34 @@ extension AudioFile {
         return codes
     }
     
+    /// Get a list of all MIME types.
+    ///
+    /// - returns: A `[String]` that contains all available MIME types.
+    /// - throws: `AudioFileError`
     public static func allMIMETypes() throws -> [String] {
         var types = NSArray()
         try AudioFile.property(.AllMIMETypes, buffer: &types)
         return types.flatMap { $0 as? String }
     }
     
+    /// Get a list of all UTIs.
+    ///
+    /// - returns: A `[String]` that contains all available UTIs.
+    /// - throws: `AudioFileError`
     public static func allUTIs() throws -> [String] {
         var UTIs = NSArray()
         try AudioFile.property(.AllUTIs, buffer: &UTIs)
         return UTIs.flatMap { $0 as? String }
     }
     
+    /**
+    
+     Get a list of all available format IDs for the specified `AudioFileType`.
+     
+     - parameter audioFileType: The `AudioFileType` that you are querying.
+     - returns: A `[AudioFormatID]` of all format IDs for the specified `AudioFileType`.
+     - throws: `AudioFileError`
+     */
     public static func availableFormatIDs(audioFileType: AudioFileType) throws -> [AudioFormatID] {
         
         var specifier = audioFileType.code
@@ -103,6 +126,15 @@ extension AudioFile {
         return formats
     }
     
+    /**
+     Get a list of `AudioStreamBasicDescription`s for the specified format.
+    
+     - parameter audioFileTypeAndFormatID: The `AudioFileTypeAndFormatID`
+     that you are querying.
+     - returns: A `[AudioStreamBasicDescription]` containing formats available
+     for the specified `AudioFileTypeAndFormatID`.
+     - throws: `AudioFileError`
+     */
     public static func availableStreamDescriptionsForFormat(
         audioFileTypeAndFormatID: AudioFileTypeAndFormatID) throws -> [AudioStreamBasicDescription] {
         
@@ -124,6 +156,14 @@ extension AudioFile {
         return formats
     }
     
+    /**
+     Get a list of audio file extensions available for the specified
+     `AudioFileType`.
+     
+     - parameter audioFileType: The `AudioFileType` that you are querying.
+     - returns: A `[String]` containing the list of available extensions.
+     - throws: `AudioFileError`
+     */
     public static func extensionsForType(audioFileType: AudioFileType) throws -> [String] {
     
         var specifier = audioFileType.code
@@ -142,6 +182,13 @@ extension AudioFile {
         return extensions.flatMap { $0 as? String }
     }
     
+    /**
+     Get name of the file type for the specified `AudioFileType`.
+     
+     - parameter audioFileType: The `AudioFileType` that you are querying.
+     - returns: The name of the `AudioFileType`.
+     - throws: `AudioFileError`
+     */
     public static func fileTypeName(audioFileType: AudioFileType) throws -> String {
         var specifier = audioFileType.code
         let specifierSize = UInt32(sizeofValue(specifier))
@@ -158,7 +205,15 @@ extension AudioFile {
                 size: size)
         return typeName as String
     }
-
+    
+    /**
+     Get a list of HFS type codes for the specified `AudioFileType`.
+     
+     - parameter audioFileType: The `AudioFileType` that you are querying.
+     - returns: A `[FourCharCode]` containing the available HFS type codes
+     for the specified `AudioFileType`.
+     - throws: `AudioFileError`
+     */
     public static func HFSTypeCodesForType(audioFileType: AudioFileType) throws -> [FourCharCode] {
         var specifier = audioFileType.code
         let specifierSize = UInt32(sizeofValue(specifier))
@@ -175,7 +230,15 @@ extension AudioFile {
             size: size)
         return codes
     }
-
+    
+    /**
+     Get a list of MIME types for the specified `AudioFileType`.
+     
+     - parameter audioFileType: The `AudioFileType` that you are querying.
+     - returns: A `[String]` containing the available MIME types
+     for the specified `AudioFileType`.
+     - throws: `AudioFileError`
+     */
     public static func MIMETypesForType(audioFileType: AudioFileType) throws -> [String] {
         var specifier = audioFileType.code
         let specifierSize = UInt32(sizeofValue(specifier))
@@ -193,13 +256,26 @@ extension AudioFile {
         return types.flatMap { $0 as? String }
     }
     
-    public static func readableTypes() throws -> [UInt32] {
+    /**
+     Get a list of all readable audio file types.
+     
+     - returns: A `[AudioFileTypeID]` containing all readable file types.
+     - throws: `AudioFileError`
+     */
+    public static func readableTypes() throws -> [AudioFileTypeID] {
         let size = try AudioFile.globalPropertySize(.ReadableTypes)
         var types = [AudioFileTypeID](count: Int(size) / sizeof(AudioFileTypeID), repeatedValue: 0)
         try AudioFile.property(.ReadableTypes, buffer: &types, size: size)
         return types
     }
     
+    /**
+     Get a list of types available for the provided extension.
+     
+     - parameter ext: The audio file extension that you are querying.
+     - returns: A `[AudioFileTypeID]` containing all available file types.
+     - throws: `AudioFileError`
+     */
     public static func typesForExtension(ext: String) throws -> [AudioFileTypeID] {
         var specifier = NSString(string: ext)
         let specifierSize = UInt32(sizeofValue(specifier))
@@ -217,8 +293,15 @@ extension AudioFile {
         return types
     }
     
-    public static func typesForHFSTypeCode(ext: FourCharCode) throws -> [AudioFileTypeID] {
-        var specifier = ext
+    /**
+     Get a list of types available for the provided HFS type code.
+     
+     - parameter code: The HFS type code that you are querying.
+     - returns: A `[AudioFileTypeID]` containing all available file types.
+     - throws: `AudioFileError`
+     */
+    public static func typesForHFSTypeCode(code: FourCharCode) throws -> [AudioFileTypeID] {
+        var specifier = code
         let specifierSize = UInt32(sizeofValue(specifier))
         let size = try AudioFile.globalPropertySize(
             .TypesForHFSTypeCode,
@@ -234,8 +317,15 @@ extension AudioFile {
         return types
     }
     
-    public static func typesForMIMEType(ext: String) throws -> [AudioFileTypeID] {
-        var specifier = NSString(string: ext)
+    /**
+     Get a list of types available for the provided MIME type.
+     
+     - parameter type: The MIME type that you are querying.
+     - returns: A `[AudioFileTypeID]` containing all available file types.
+     - throws: `AudioFileError`
+     */
+    public static func typesForMIMEType(type: String) throws -> [AudioFileTypeID] {
+        var specifier = NSString(string: type)
         let specifierSize = UInt32(sizeofValue(specifier))
         let size = try AudioFile.globalPropertySize(
             .TypesForMIMEType,
@@ -251,8 +341,15 @@ extension AudioFile {
         return types
     }
     
-    public static func typesForUTI(ext: String) throws -> [AudioFileTypeID] {
-        var specifier = NSString(string: ext)
+    /**
+     Get a list of types available for the provided UTI.
+     
+     - parameter UTI: The UTI that you are querying.
+     - returns: A `[AudioFileTypeID]` containing all available file types.
+     - throws: `AudioFileError`
+     */
+    public static func typesForUTI(UTI: String) throws -> [AudioFileTypeID] {
+        var specifier = NSString(string: UTI)
         let specifierSize = UInt32(sizeofValue(specifier))
         let size = try AudioFile.globalPropertySize(
             .TypesForUTI,
@@ -268,6 +365,13 @@ extension AudioFile {
         return types
     }
     
+    /**
+     Get a list of UTIs available for the provided file type.
+     
+     - parameter audioFileType: The `AudioFileType` that you are querying.
+     - returns: A `[String]` containing all available UTIs.
+     - throws: `AudioFileError`
+     */
     public static func UTIsForType(audioFileType: AudioFileType) throws -> [String] {
         var specifier = audioFileType.code
         let specifierSize = UInt32(sizeofValue(specifier))
@@ -286,7 +390,12 @@ extension AudioFile {
         return UTIs.flatMap { $0 as? String }
     }
     
-    public static func writableTypes() throws -> [AudioFileTypeID] {
+    /**
+     Get a list of all writable audio file types.
+     
+     - returns: A `[AudioFileTypeID]` containing all writable file types.
+     - throws: `AudioFileError`
+     */    public static func writableTypes() throws -> [AudioFileTypeID] {
         let size = try AudioFile.globalPropertySize(.WritableTypes)
         var types = [AudioFileTypeID](count: Int(size) / sizeof(AudioFileTypeID), repeatedValue: 0)
         try AudioFile.property(.WritableTypes, buffer: &types, size: size)
