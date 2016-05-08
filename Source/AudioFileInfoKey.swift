@@ -6,13 +6,11 @@
 //  Copyright © 2016 letvargo. All rights reserved.
 //
 
-import Foundation
 import AudioToolbox
 
 extension AudioFile {
 
     public func infoForKey(key: AudioFileInfoKey) throws -> NSString? {
-        
         return try infoDictionary()[key.code] as? NSString
     }
 }

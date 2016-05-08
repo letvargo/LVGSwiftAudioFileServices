@@ -78,7 +78,7 @@ extension AudioFile {
         
         var specifier = audioFileType.code
         let specifierSize = UInt32(sizeofValue(specifier))
-        var size = try AudioFile.globalPropertySize(
+        let size = try AudioFile.globalPropertySize(
             .AvailableFormatIDs,
             specifierSize: specifierSize,
             specifier: &specifier )
@@ -97,7 +97,7 @@ extension AudioFile {
         
         var specifier = audioFileTypeAndFormatID
         let specifierSize = UInt32(sizeofValue(specifier))
-        var size = try AudioFile.globalPropertySize(
+        let size = try AudioFile.globalPropertySize(
             .AvailableStreamDescriptionsForFormat,
             specifierSize: specifierSize,
             specifier: &specifier )
@@ -117,7 +117,7 @@ extension AudioFile {
     
         var specifier = audioFileType.code
         let specifierSize = UInt32(sizeofValue(specifier))
-        var size = try AudioFile.globalPropertySize(
+        let size = try AudioFile.globalPropertySize(
             .ExtensionsForType,
             specifierSize: specifierSize,
             specifier: &specifier )
@@ -134,7 +134,7 @@ extension AudioFile {
     public static func fileTypeName(audioFileType: AudioFileType) throws -> String {
         var specifier = audioFileType.code
         let specifierSize = UInt32(sizeofValue(specifier))
-        var size = try AudioFile.globalPropertySize(
+        let size = try AudioFile.globalPropertySize(
             .FileTypeName,
             specifierSize: specifierSize,
             specifier: &specifier )
@@ -151,7 +151,7 @@ extension AudioFile {
     public static func HFSTypeCodesForType(audioFileType: AudioFileType) throws -> [FourCharCode] {
         var specifier = audioFileType.code
         let specifierSize = UInt32(sizeofValue(specifier))
-        var size = try AudioFile.globalPropertySize(
+        let size = try AudioFile.globalPropertySize(
             .HFSTypeCodesForType,
             specifierSize: specifierSize,
             specifier: &specifier )
@@ -168,7 +168,7 @@ extension AudioFile {
     public static func MIMETypesForType(audioFileType: AudioFileType) throws -> [String] {
         var specifier = audioFileType.code
         let specifierSize = UInt32(sizeofValue(specifier))
-        var size = try AudioFile.globalPropertySize(
+        let size = try AudioFile.globalPropertySize(
             .MIMETypesForType,
             specifierSize: specifierSize,
             specifier: &specifier)
@@ -192,7 +192,7 @@ extension AudioFile {
     public static func typesForExtension(ext: String) throws -> [AudioFileTypeID] {
         var specifier = NSString(string: ext)
         let specifierSize = UInt32(sizeofValue(specifier))
-        var size = try AudioFile.globalPropertySize(
+        let size = try AudioFile.globalPropertySize(
             .TypesForExtension,
             specifierSize: specifierSize,
             specifier: &specifier )
@@ -209,7 +209,7 @@ extension AudioFile {
     public static func typesForHFSTypeCode(ext: FourCharCode) throws -> [AudioFileTypeID] {
         var specifier = ext
         let specifierSize = UInt32(sizeofValue(specifier))
-        var size = try AudioFile.globalPropertySize(
+        let size = try AudioFile.globalPropertySize(
             .TypesForHFSTypeCode,
             specifierSize: specifierSize,
             specifier: &specifier )
@@ -226,7 +226,7 @@ extension AudioFile {
     public static func typesForMIMEType(ext: String) throws -> [AudioFileTypeID] {
         var specifier = NSString(string: ext)
         let specifierSize = UInt32(sizeofValue(specifier))
-        var size = try AudioFile.globalPropertySize(
+        let size = try AudioFile.globalPropertySize(
             .TypesForMIMEType,
             specifierSize: specifierSize,
             specifier: &specifier )
@@ -243,7 +243,7 @@ extension AudioFile {
     public static func typesForUTI(ext: String) throws -> [AudioFileTypeID] {
         var specifier = NSString(string: ext)
         let specifierSize = UInt32(sizeofValue(specifier))
-        var size = try AudioFile.globalPropertySize(
+        let size = try AudioFile.globalPropertySize(
             .TypesForUTI,
             specifierSize: specifierSize,
             specifier: &specifier )
@@ -276,7 +276,7 @@ extension AudioFile {
     }
     
     public static func writableTypes() throws -> [AudioFileTypeID] {
-        var size = try AudioFile.globalPropertySize(.WritableTypes)
+        let size = try AudioFile.globalPropertySize(.WritableTypes)
         var types = [AudioFileTypeID](count: Int(size) / sizeof(AudioFileTypeID), repeatedValue: 0)
         try AudioFile.property(.WritableTypes, buffer: &types, size: size)
         return types
