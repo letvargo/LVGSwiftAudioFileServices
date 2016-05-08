@@ -13,6 +13,8 @@
 		57CC08FC1CDA1C8600253BF3 /* AudioFileCreationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57CC08FA1CDA1C8600253BF3 /* AudioFileCreationTests.swift */; };
 		57E3C7671CDF7F47002D5836 /* AudioFileGlobalPropertyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57E3C7661CDF7F47002D5836 /* AudioFileGlobalPropertyTests.swift */; };
 		57E3C7681CDF7F47002D5836 /* AudioFileGlobalPropertyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57E3C7661CDF7F47002D5836 /* AudioFileGlobalPropertyTests.swift */; };
+		57E3C76A1CDF83A8002D5836 /* AudioFileGlobalPropertyGetterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57E3C7691CDF83A8002D5836 /* AudioFileGlobalPropertyGetterTests.swift */; };
+		57E3C76B1CDF83A8002D5836 /* AudioFileGlobalPropertyGetterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57E3C7691CDF83A8002D5836 /* AudioFileGlobalPropertyGetterTests.swift */; };
 		C3B373EB6940036D29B25F38 /* Pods_Tests_OSX.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D16300CC7E36E0B32DE7855A /* Pods_Tests_OSX.framework */; };
 		C7C2EA25CA8B1A64200883D2 /* Pods_Tests_iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F1391B81FA5291C52FF78C1 /* Pods_Tests_iOS.framework */; };
 /* End PBXBuildFile section */
@@ -27,6 +29,7 @@
 		57CC08EE1CD9C98B00253BF3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		57CC08FA1CDA1C8600253BF3 /* AudioFileCreationTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AudioFileCreationTests.swift; path = TestFiles/AudioFileCreationTests.swift; sourceTree = "<group>"; };
 		57E3C7661CDF7F47002D5836 /* AudioFileGlobalPropertyTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AudioFileGlobalPropertyTests.swift; path = TestFiles/AudioFileGlobalPropertyTests.swift; sourceTree = "<group>"; };
+		57E3C7691CDF83A8002D5836 /* AudioFileGlobalPropertyGetterTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AudioFileGlobalPropertyGetterTests.swift; path = TestFiles/AudioFileGlobalPropertyGetterTests.swift; sourceTree = "<group>"; };
 		62D44012D30562FED159C96F /* Pods-Tests-OSX.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Tests-OSX.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Tests-OSX/Pods-Tests-OSX.debug.xcconfig"; sourceTree = "<group>"; };
 		766C6A74F2FC8BC07AD318BD /* Pods-Tests-iOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Tests-iOS.release.xcconfig"; path = "Pods/Target Support Files/Pods-Tests-iOS/Pods-Tests-iOS.release.xcconfig"; sourceTree = "<group>"; };
 		D16300CC7E36E0B32DE7855A /* Pods_Tests_OSX.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Tests_OSX.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -105,6 +108,7 @@
 				57CC08FA1CDA1C8600253BF3 /* AudioFileCreationTests.swift */,
 				575174CB1CDEDCE00019E792 /* AudioFileErrorTests.swift */,
 				57E3C7661CDF7F47002D5836 /* AudioFileGlobalPropertyTests.swift */,
+				57E3C7691CDF83A8002D5836 /* AudioFileGlobalPropertyGetterTests.swift */,
 			);
 			name = Tests;
 			sourceTree = "<group>";
@@ -314,6 +318,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				57E3C7671CDF7F47002D5836 /* AudioFileGlobalPropertyTests.swift in Sources */,
+				57E3C76A1CDF83A8002D5836 /* AudioFileGlobalPropertyGetterTests.swift in Sources */,
 				57CC08FB1CDA1C8600253BF3 /* AudioFileCreationTests.swift in Sources */,
 				575174CC1CDEDCE00019E792 /* AudioFileErrorTests.swift in Sources */,
 			);
@@ -324,6 +329,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				57E3C7681CDF7F47002D5836 /* AudioFileGlobalPropertyTests.swift in Sources */,
+				57E3C76B1CDF83A8002D5836 /* AudioFileGlobalPropertyGetterTests.swift in Sources */,
 				57CC08FC1CDA1C8600253BF3 /* AudioFileCreationTests.swift in Sources */,
 				575174CD1CDEDCE00019E792 /* AudioFileErrorTests.swift in Sources */,
 			);

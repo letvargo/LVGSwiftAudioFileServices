@@ -13,13 +13,24 @@ extension AudioFile {
     
     // MARK: Audio File Services Global Property Getters
     
+    /**
+    
+     Get the size of the specified global property.
+     
+     - parameters:
+       - property: The global property.
+       - specifierSize: The size of the specifier, if any. Pass `0` if no
+       specifier is required for querying the property.
+       - specifier: A void pointer to data that is used to query the property.
+     - returns: The size of the property data in bytes as a `UInt32` value.
+     - throws: `AudioFileError`
+     */
     public static func globalPropertySize(
         property: AudioFileGlobalProperty,
         specifierSize: UInt32 = 0,
         specifier: UnsafeMutablePointer<Void> = nil) throws -> UInt32 {
         
-        var size: UInt32 = 0
-        
+        var size: UInt32 = UInt32.max
         try Error.check(
             AudioFileGetGlobalInfoSize(
                 property.code,
@@ -27,7 +38,6 @@ extension AudioFile {
                 specifier,
                 &size ),
             message: "An error occurred while getting the size of the global property '\(property.shortDescription)'.")
-        
         return size
     }
     
@@ -49,6 +59,7 @@ extension AudioFile {
             message: "An error occurred while trying to get the global property '\(property.shortDescription)'.")
     }
     
+    /// Get a list off all audio file extensions.
     public static func allExtensions() throws -> [String] {
         var extensions = NSArray()
         try AudioFile.property(.AllExtensions, buffer: &extensions)
