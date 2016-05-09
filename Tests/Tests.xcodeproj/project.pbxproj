@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		575174CC1CDEDCE00019E792 /* AudioFileErrorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 575174CB1CDEDCE00019E792 /* AudioFileErrorTests.swift */; };
 		575174CD1CDEDCE00019E792 /* AudioFileErrorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 575174CB1CDEDCE00019E792 /* AudioFileErrorTests.swift */; };
+		57989CAC1CDFD8D500CB21BC /* AudioFilePropertyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57989CAB1CDFD8D500CB21BC /* AudioFilePropertyTests.swift */; };
+		57989CAD1CDFD8D500CB21BC /* AudioFilePropertyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57989CAB1CDFD8D500CB21BC /* AudioFilePropertyTests.swift */; };
 		57CC08FB1CDA1C8600253BF3 /* AudioFileCreationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57CC08FA1CDA1C8600253BF3 /* AudioFileCreationTests.swift */; };
 		57CC08FC1CDA1C8600253BF3 /* AudioFileCreationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57CC08FA1CDA1C8600253BF3 /* AudioFileCreationTests.swift */; };
 		57E3C7671CDF7F47002D5836 /* AudioFileGlobalPropertyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57E3C7661CDF7F47002D5836 /* AudioFileGlobalPropertyTests.swift */; };
@@ -25,6 +27,7 @@
 		0AD33BE38D234006B9428B73 /* Pods-Tests-OSX.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Tests-OSX.release.xcconfig"; path = "Pods/Target Support Files/Pods-Tests-OSX/Pods-Tests-OSX.release.xcconfig"; sourceTree = "<group>"; };
 		0F1391B81FA5291C52FF78C1 /* Pods_Tests_iOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Tests_iOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		575174CB1CDEDCE00019E792 /* AudioFileErrorTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AudioFileErrorTests.swift; path = TestFiles/AudioFileErrorTests.swift; sourceTree = "<group>"; };
+		57989CAB1CDFD8D500CB21BC /* AudioFilePropertyTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AudioFilePropertyTests.swift; sourceTree = "<group>"; };
 		57CC08DD1CD9C95900253BF3 /* Tests-iOS.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Tests-iOS.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		57CC08E21CD9C95A00253BF3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		57CC08EA1CD9C98B00253BF3 /* Tests-OSX.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Tests-OSX.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -113,6 +116,7 @@
 				57E3C7661CDF7F47002D5836 /* AudioFileGlobalPropertyTests.swift */,
 				57E3C7691CDF83A8002D5836 /* AudioFileGlobalPropertyGetterTests.swift */,
 				57E3C76C1CDFB9E1002D5836 /* AudioFileInfoKeyTests.swift */,
+				57989CAB1CDFD8D500CB21BC /* AudioFilePropertyTests.swift */,
 			);
 			name = Tests;
 			sourceTree = "<group>";
@@ -326,6 +330,7 @@
 				57E3C76D1CDFB9E1002D5836 /* AudioFileInfoKeyTests.swift in Sources */,
 				57CC08FB1CDA1C8600253BF3 /* AudioFileCreationTests.swift in Sources */,
 				575174CC1CDEDCE00019E792 /* AudioFileErrorTests.swift in Sources */,
+				57989CAC1CDFD8D500CB21BC /* AudioFilePropertyTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -338,6 +343,7 @@
 				57E3C76E1CDFB9E1002D5836 /* AudioFileInfoKeyTests.swift in Sources */,
 				57CC08FC1CDA1C8600253BF3 /* AudioFileCreationTests.swift in Sources */,
 				575174CD1CDEDCE00019E792 /* AudioFileErrorTests.swift in Sources */,
+				57989CAD1CDFD8D500CB21BC /* AudioFilePropertyTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
