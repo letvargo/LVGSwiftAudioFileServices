@@ -21,61 +21,61 @@ import LVGUtilities
 public enum AudioFileGlobalProperty: CodedPropertyType {
     
     /// The equivalent of kAudioFileGlobalInfo_AllExtensions
-    case AllExtensions
+    case allExtensions
     /// The equivalent of kAudioFileGlobalInfo_AllHFSTypeCodes
-    case AllHFSTypeCodes
+    case allHFSTypeCodes
     /// The equivalent of kAudioFileGlobalInfo_AllMIMIETypes
-    case AllMIMETypes
+    case allMIMETypes
     /// The equivalent of kAudioFileGlobalInfo_AllUTIs
-    case AllUTIs
+    case allUTIs
     /// The equivalent of kAudioFileGlobalInfo_AvailableFormatIDs
-    case AvailableFormatIDs
+    case availableFormatIDs
     /// The equivalent of kAudioFileGlobalInfo_AvailableStreamDescriptionsForFormat
-    case AvailableStreamDescriptionsForFormat
+    case availableStreamDescriptionsForFormat
     /// The equivalent of kAudioFileGlobalInfo_ExtensionsForType
-    case ExtensionsForType
+    case extensionsForType
     /// The equivalent of kAudioFileGlobalInfo_FileTypeName
-    case FileTypeName
+    case fileTypeName
     /// The equivalent of kAudioFileGlobalInfo_HFSTypeCodesForType
-    case HFSTypeCodesForType
+    case hfsTypeCodesForType
     /// The equivalent of kAudioFileGlobalInfo_MIMETypesForType
-    case MIMETypesForType
+    case mimeTypesForType
     /// The equivalent of kAudioFileGlobalInfo_ReadableTypes
-    case ReadableTypes
+    case readableTypes
     /// The equivalent of kAudioFileGlobalInfo_TypesForExtension
-    case TypesForExtension
+    case typesForExtension
     /// The equivalent of kAudioFileGlobalInfo_TypesForHFSTypeCode
-    case TypesForHFSTypeCode
+    case typesForHFSTypeCode
     /// The equivalent of kAudioFileGlobalInfo_TypesForMIMEType
-    case TypesForMIMEType
+    case typesForMIMEType
     /// The equivalent of kAudioFileGlobalInfo_TypesForUTI
-    case TypesForUTI
+    case typesForUTI
     /// The equivalent of kAudioFileGlobalInfo_UTIsForType
-    case UTIsForType
+    case utisForType
     /// The equivalent of kAudioFileGlobalInfo_WritableTypes
-    case WritableTypes
+    case writableTypes
     
     /// Initialize an `AudioFileGlobalProperty` from a property ID constant
     /// defined in Audio File Services.
     public init?(code: UInt32) {
         switch code {
-        case kAudioFileGlobalInfo_AllExtensions:                            self = .AllExtensions
-        case kAudioFileGlobalInfo_AllHFSTypeCodes:                          self = .AllHFSTypeCodes
-        case kAudioFileGlobalInfo_AllMIMETypes:                             self = .AllMIMETypes
-        case kAudioFileGlobalInfo_AllUTIs:                                  self = .AllUTIs
-        case kAudioFileGlobalInfo_AvailableFormatIDs:                       self = .AvailableFormatIDs
-        case kAudioFileGlobalInfo_AvailableStreamDescriptionsForFormat:     self = .AvailableStreamDescriptionsForFormat
-        case kAudioFileGlobalInfo_ExtensionsForType:                        self = .ExtensionsForType
-        case kAudioFileGlobalInfo_FileTypeName:                             self = .FileTypeName
-        case kAudioFileGlobalInfo_HFSTypeCodesForType:                      self = .HFSTypeCodesForType
-        case kAudioFileGlobalInfo_MIMETypesForType:                         self = .MIMETypesForType
-        case kAudioFileGlobalInfo_ReadableTypes:                            self = .ReadableTypes
-        case kAudioFileGlobalInfo_TypesForExtension:                        self = .TypesForExtension
-        case kAudioFileGlobalInfo_TypesForHFSTypeCode:                      self = .TypesForHFSTypeCode
-        case kAudioFileGlobalInfo_TypesForMIMEType:                         self = .TypesForMIMEType
-        case kAudioFileGlobalInfo_TypesForUTI:                              self = .TypesForUTI
-        case kAudioFileGlobalInfo_UTIsForType:                              self = .UTIsForType
-        case kAudioFileGlobalInfo_WritableTypes:                            self = .WritableTypes
+        case kAudioFileGlobalInfo_AllExtensions:                            self = .allExtensions
+        case kAudioFileGlobalInfo_AllHFSTypeCodes:                          self = .allHFSTypeCodes
+        case kAudioFileGlobalInfo_AllMIMETypes:                             self = .allMIMETypes
+        case kAudioFileGlobalInfo_AllUTIs:                                  self = .allUTIs
+        case kAudioFileGlobalInfo_AvailableFormatIDs:                       self = .availableFormatIDs
+        case kAudioFileGlobalInfo_AvailableStreamDescriptionsForFormat:     self = .availableStreamDescriptionsForFormat
+        case kAudioFileGlobalInfo_ExtensionsForType:                        self = .extensionsForType
+        case kAudioFileGlobalInfo_FileTypeName:                             self = .fileTypeName
+        case kAudioFileGlobalInfo_HFSTypeCodesForType:                      self = .hfsTypeCodesForType
+        case kAudioFileGlobalInfo_MIMETypesForType:                         self = .mimeTypesForType
+        case kAudioFileGlobalInfo_ReadableTypes:                            self = .readableTypes
+        case kAudioFileGlobalInfo_TypesForExtension:                        self = .typesForExtension
+        case kAudioFileGlobalInfo_TypesForHFSTypeCode:                      self = .typesForHFSTypeCode
+        case kAudioFileGlobalInfo_TypesForMIMEType:                         self = .typesForMIMEType
+        case kAudioFileGlobalInfo_TypesForUTI:                              self = .typesForUTI
+        case kAudioFileGlobalInfo_UTIsForType:                              self = .utisForType
+        case kAudioFileGlobalInfo_WritableTypes:                            self = .writableTypes
         default:                                                            return nil
         }
     }
@@ -88,46 +88,46 @@ public enum AudioFileGlobalProperty: CodedPropertyType {
     /// A short description of the property.
     public var shortDescription: String {
         switch self {
-        case .AllExtensions:                        return "All extensions"
-        case .AllHFSTypeCodes:                      return "All HFS type codes"
-        case .AllMIMETypes:                         return "All MIME types"
-        case .AllUTIs:                              return "All UTIs"
-        case .AvailableFormatIDs:                   return "Available format IDs"
-        case .AvailableStreamDescriptionsForFormat: return "Available stream descriptions for format"
-        case .ExtensionsForType:                    return "Extensions for type"
-        case .FileTypeName:                         return "File type name"
-        case .HFSTypeCodesForType:                  return "HFS type codes for type"
-        case .MIMETypesForType:                     return "MIME types for type"
-        case .ReadableTypes:                        return "Readable types"
-        case .TypesForExtension:                    return "Types for extension"
-        case .TypesForHFSTypeCode:                  return "Types for HFS type code"
-        case .TypesForMIMEType:                     return "Types for MIME type"
-        case .TypesForUTI:                          return "Types for UTI"
-        case .UTIsForType:                          return "UTIs for type"
-        case .WritableTypes:                        return "Writable types"
+        case .allExtensions:                        return "All extensions"
+        case .allHFSTypeCodes:                      return "All HFS type codes"
+        case .allMIMETypes:                         return "All MIME types"
+        case .allUTIs:                              return "All UTIs"
+        case .availableFormatIDs:                   return "Available format IDs"
+        case .availableStreamDescriptionsForFormat: return "Available stream descriptions for format"
+        case .extensionsForType:                    return "Extensions for type"
+        case .fileTypeName:                         return "File type name"
+        case .hfsTypeCodesForType:                  return "HFS type codes for type"
+        case .mimeTypesForType:                     return "MIME types for type"
+        case .readableTypes:                        return "Readable types"
+        case .typesForExtension:                    return "Types for extension"
+        case .typesForHFSTypeCode:                  return "Types for HFS type code"
+        case .typesForMIMEType:                     return "Types for MIME type"
+        case .typesForUTI:                          return "Types for UTI"
+        case .utisForType:                          return "UTIs for type"
+        case .writableTypes:                        return "Writable types"
         }
     }
     
     /// The `UInt32` property ID constant defined in Audio File Services.
     public var code: UInt32 {
         switch self {
-        case .AllExtensions:                            return kAudioFileGlobalInfo_AllExtensions
-        case .AllHFSTypeCodes:                          return kAudioFileGlobalInfo_AllHFSTypeCodes
-        case .AllMIMETypes:                             return kAudioFileGlobalInfo_AllMIMETypes
-        case .AllUTIs:                                  return kAudioFileGlobalInfo_AllUTIs
-        case .AvailableFormatIDs:                       return kAudioFileGlobalInfo_AvailableFormatIDs
-        case .AvailableStreamDescriptionsForFormat:     return kAudioFileGlobalInfo_AvailableStreamDescriptionsForFormat
-        case .ExtensionsForType:                        return kAudioFileGlobalInfo_ExtensionsForType
-        case .FileTypeName:                             return kAudioFileGlobalInfo_FileTypeName
-        case .HFSTypeCodesForType:                      return kAudioFileGlobalInfo_HFSTypeCodesForType
-        case .MIMETypesForType:                         return kAudioFileGlobalInfo_MIMETypesForType
-        case .ReadableTypes:                            return kAudioFileGlobalInfo_ReadableTypes
-        case .TypesForExtension:                        return kAudioFileGlobalInfo_TypesForExtension
-        case .TypesForHFSTypeCode:                      return kAudioFileGlobalInfo_TypesForHFSTypeCode
-        case .TypesForMIMEType:                         return kAudioFileGlobalInfo_TypesForMIMEType
-        case .TypesForUTI:                              return kAudioFileGlobalInfo_TypesForUTI
-        case .UTIsForType:                              return kAudioFileGlobalInfo_UTIsForType
-        case .WritableTypes:                            return kAudioFileGlobalInfo_WritableTypes
+        case .allExtensions:                            return kAudioFileGlobalInfo_AllExtensions
+        case .allHFSTypeCodes:                          return kAudioFileGlobalInfo_AllHFSTypeCodes
+        case .allMIMETypes:                             return kAudioFileGlobalInfo_AllMIMETypes
+        case .allUTIs:                                  return kAudioFileGlobalInfo_AllUTIs
+        case .availableFormatIDs:                       return kAudioFileGlobalInfo_AvailableFormatIDs
+        case .availableStreamDescriptionsForFormat:     return kAudioFileGlobalInfo_AvailableStreamDescriptionsForFormat
+        case .extensionsForType:                        return kAudioFileGlobalInfo_ExtensionsForType
+        case .fileTypeName:                             return kAudioFileGlobalInfo_FileTypeName
+        case .hfsTypeCodesForType:                      return kAudioFileGlobalInfo_HFSTypeCodesForType
+        case .mimeTypesForType:                         return kAudioFileGlobalInfo_MIMETypesForType
+        case .readableTypes:                            return kAudioFileGlobalInfo_ReadableTypes
+        case .typesForExtension:                        return kAudioFileGlobalInfo_TypesForExtension
+        case .typesForHFSTypeCode:                      return kAudioFileGlobalInfo_TypesForHFSTypeCode
+        case .typesForMIMEType:                         return kAudioFileGlobalInfo_TypesForMIMEType
+        case .typesForUTI:                              return kAudioFileGlobalInfo_TypesForUTI
+        case .utisForType:                              return kAudioFileGlobalInfo_UTIsForType
+        case .writableTypes:                            return kAudioFileGlobalInfo_WritableTypes
         }
     }
 }

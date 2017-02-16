@@ -20,96 +20,96 @@ import LVGUtilities
 public enum AudioFileProperty: CodedPropertyType {
     
     /// The equivalent of kAudioFilePropertyAlbumArtwork
-    case AlbumArtwork
+    case albumArtwork
     /// The equivalent of kAudioFilePropertyAudioDataByteCount
-    case AudioDataByteCount
+    case audioDataByteCount
     /// The equivalent of kAudioFilePropertyAudioDataPacketCount
-    case AudioDataPacketCount
+    case audioDataPacketCount
     /// The equivalent of kAudioFilePropertyAudioTrackCount
-    case AudioTrackCount
+    case audioTrackCount
     /// The equivalent of kAudioFilePropertyBitRate
-    case BitRate
+    case bitRate
     /// The equivalent of kAudioFilePropertyByteToPacket
-    case ByteToPacket
+    case byteToPacket
     /// The equivalent of kAudioFilePropertyChannelLayout
-    case ChannelLayout
+    case channelLayout
     /// The equivalent of kAudioFilePropertyChunkIDs
-    case ChunkIDs
+    case chunkIDs
     /// The equivalent of kAudioFilePropertyDataFormat
-    case DataFormat
+    case dataFormat
     /// The equivalent of kAudioFilePropertyDataOffset
-    case DataOffset
+    case dataOffset
     /// The equivalent of kAudioFilePropertyDeferSizeUpdates
-    case DeferSizeUpdates
+    case deferSizeUpdates
     /// The equivalent of kAudioFilePropertyEstimatedDuration
-    case EstimatedDuration
+    case estimatedDuration
     /// The equivalent of kAudioFilePropertyFileFormat
-    case FileFormat
+    case fileFormat
     /// The equivalent of kAudioFilePropertyFrameToPacket
-    case FrameToPacket
+    case frameToPacket
     /// The equivalent of kAudioFilePropertyFormatList
-    case FormatList
+    case formatList
     /// The equivalent of kAudioFilePropertyID3Tag
-    case ID3Tag
+    case id3Tag
     /// The equivalent of kAudioFilePropertyInfoDictionary
-    case InfoDictionary
+    case infoDictionary
     /// The equivalent of kAudioFilePropertyIsOptimized
-    case IsOptimized
+    case isOptimized
     /// The equivalent of kAudioFilePropertyMagicCookieData
-    case MagicCookieData
+    case magicCookieData
     /// The equivalent of kAudioFilePropertyMarkerList
-    case MarkerList
+    case markerList
     /// The equivalent of kAudioFilePropertyMaximumPacketSize
-    case MaximumPacketSize
+    case maximumPacketSize
     /// The equivalent of kAudioFilePropertyPacketToByte
-    case PacketToByte
+    case packetToByte
     /// The equivalent of kAudioFilePropertyPacketToFrame
-    case PacketToFrame
+    case packetToFrame
     /// The equivalent of kAudioFilePropertyRegionList
-    case RegionList
+    case regionList
     /// The equivalent of kAudioFilePropertyPacketTableInfo
-    case PacketTableInfo
+    case packetTableInfo
     /// The equivalent of kAudioFilePropertyPacketSizeUpperBound
-    case PacketSizeUpperBound
+    case packetSizeUpperBound
     /// The equivalent of kAudioFilePropertyReserveDuration
-    case ReserveDuration
+    case reserveDuration
     /// The equivalent of kAudioFilePropertySourceBitDepth
-    case SourceBitDepth
+    case sourceBitDepth
     /// The equivalent of kAudioFilePropertyUseAudioTrack
-    case UseAudioTrack
+    case useAudioTrack
     
     /// Initialize an `AudioFileProperty` from an `AudioFilePropertyID`.
     public init?(code: AudioFilePropertyID) {
         switch code {
-        case kAudioFilePropertyFileFormat:              self = .FileFormat
-        case kAudioFilePropertyDataFormat:              self = .DataFormat
-        case kAudioFilePropertyFormatList:              self = .FormatList
-        case kAudioFilePropertyIsOptimized:             self = .IsOptimized
-        case kAudioFilePropertyMagicCookieData:         self = .MagicCookieData
-        case kAudioFilePropertyAudioDataByteCount:      self = .AudioDataByteCount
-        case kAudioFilePropertyAudioDataPacketCount:    self = .AudioDataPacketCount
-        case kAudioFilePropertyMaximumPacketSize:       self = .MaximumPacketSize
-        case kAudioFilePropertyDataOffset:              self = .DataOffset
-        case kAudioFilePropertyChannelLayout:           self = .ChannelLayout
-        case kAudioFilePropertyDeferSizeUpdates:        self = .DeferSizeUpdates
-        case kAudioFilePropertyMarkerList:              self = .MarkerList
-        case kAudioFilePropertyRegionList:              self = .RegionList
-        case kAudioFilePropertyPacketToFrame:           self = .PacketToFrame
-        case kAudioFilePropertyFrameToPacket:           self = .FrameToPacket
-        case kAudioFilePropertyPacketToByte:            self = .PacketToByte
-        case kAudioFilePropertyByteToPacket:            self = .ByteToPacket
-        case kAudioFilePropertyChunkIDs:                self = .ChunkIDs
-        case kAudioFilePropertyPacketTableInfo:         self = .PacketTableInfo
-        case kAudioFilePropertyPacketSizeUpperBound:    self = .PacketSizeUpperBound
-        case kAudioFilePropertyInfoDictionary:          self = .InfoDictionary
-        case kAudioFilePropertyAlbumArtwork:            self = .AlbumArtwork
-        case kAudioFilePropertyReserveDuration:         self = .ReserveDuration
-        case kAudioFilePropertyEstimatedDuration:       self = .EstimatedDuration
-        case kAudioFilePropertyBitRate:                 self = .BitRate
-        case kAudioFilePropertyID3Tag:                  self = .ID3Tag
-        case kAudioFilePropertySourceBitDepth:          self = .SourceBitDepth
-        case kAudioFilePropertyAudioTrackCount:         self = .AudioTrackCount
-        case kAudioFilePropertyUseAudioTrack:           self = .UseAudioTrack
+        case kAudioFilePropertyFileFormat:              self = .fileFormat
+        case kAudioFilePropertyDataFormat:              self = .dataFormat
+        case kAudioFilePropertyFormatList:              self = .formatList
+        case kAudioFilePropertyIsOptimized:             self = .isOptimized
+        case kAudioFilePropertyMagicCookieData:         self = .magicCookieData
+        case kAudioFilePropertyAudioDataByteCount:      self = .audioDataByteCount
+        case kAudioFilePropertyAudioDataPacketCount:    self = .audioDataPacketCount
+        case kAudioFilePropertyMaximumPacketSize:       self = .maximumPacketSize
+        case kAudioFilePropertyDataOffset:              self = .dataOffset
+        case kAudioFilePropertyChannelLayout:           self = .channelLayout
+        case kAudioFilePropertyDeferSizeUpdates:        self = .deferSizeUpdates
+        case kAudioFilePropertyMarkerList:              self = .markerList
+        case kAudioFilePropertyRegionList:              self = .regionList
+        case kAudioFilePropertyPacketToFrame:           self = .packetToFrame
+        case kAudioFilePropertyFrameToPacket:           self = .frameToPacket
+        case kAudioFilePropertyPacketToByte:            self = .packetToByte
+        case kAudioFilePropertyByteToPacket:            self = .byteToPacket
+        case kAudioFilePropertyChunkIDs:                self = .chunkIDs
+        case kAudioFilePropertyPacketTableInfo:         self = .packetTableInfo
+        case kAudioFilePropertyPacketSizeUpperBound:    self = .packetSizeUpperBound
+        case kAudioFilePropertyInfoDictionary:          self = .infoDictionary
+        case kAudioFilePropertyAlbumArtwork:            self = .albumArtwork
+        case kAudioFilePropertyReserveDuration:         self = .reserveDuration
+        case kAudioFilePropertyEstimatedDuration:       self = .estimatedDuration
+        case kAudioFilePropertyBitRate:                 self = .bitRate
+        case kAudioFilePropertyID3Tag:                  self = .id3Tag
+        case kAudioFilePropertySourceBitDepth:          self = .sourceBitDepth
+        case kAudioFilePropertyAudioTrackCount:         self = .audioTrackCount
+        case kAudioFilePropertyUseAudioTrack:           self = .useAudioTrack
         default:                                        return nil
         }
     }
@@ -117,35 +117,35 @@ public enum AudioFileProperty: CodedPropertyType {
     /// The audio file property ID constant as defined in Audio File Services.
     public var code: UInt32 {
         switch self {
-        case .FileFormat:           return kAudioFilePropertyFileFormat
-        case .DataFormat:           return kAudioFilePropertyDataFormat
-        case .FormatList:           return kAudioFilePropertyFormatList
-        case .IsOptimized:          return kAudioFilePropertyIsOptimized
-        case .MagicCookieData:      return kAudioFilePropertyMagicCookieData
-        case .AudioDataByteCount:   return kAudioFilePropertyAudioDataByteCount
-        case .AudioDataPacketCount: return kAudioFilePropertyAudioDataPacketCount
-        case .MaximumPacketSize:    return kAudioFilePropertyMaximumPacketSize
-        case .DataOffset:           return kAudioFilePropertyDataOffset
-        case .ChannelLayout:        return kAudioFilePropertyChannelLayout
-        case .DeferSizeUpdates:     return kAudioFilePropertyDeferSizeUpdates
-        case .MarkerList:           return kAudioFilePropertyMarkerList
-        case .RegionList:           return kAudioFilePropertyRegionList
-        case .PacketToFrame:        return kAudioFilePropertyPacketToFrame
-        case .FrameToPacket:        return kAudioFilePropertyFrameToPacket
-        case .PacketToByte:         return kAudioFilePropertyPacketToByte
-        case .ByteToPacket:         return kAudioFilePropertyByteToPacket
-        case .ChunkIDs:             return kAudioFilePropertyChunkIDs
-        case .PacketTableInfo:      return kAudioFilePropertyPacketTableInfo
-        case .PacketSizeUpperBound: return kAudioFilePropertyPacketSizeUpperBound
-        case .InfoDictionary:       return kAudioFilePropertyInfoDictionary
-        case .AlbumArtwork:         return kAudioFilePropertyAlbumArtwork
-        case .ReserveDuration:      return kAudioFilePropertyReserveDuration
-        case .EstimatedDuration:    return kAudioFilePropertyEstimatedDuration
-        case .BitRate:              return kAudioFilePropertyBitRate
-        case .ID3Tag:               return kAudioFilePropertyID3Tag
-        case .SourceBitDepth:       return kAudioFilePropertySourceBitDepth
-        case .AudioTrackCount:      return kAudioFilePropertyAudioTrackCount
-        case .UseAudioTrack:        return kAudioFilePropertyUseAudioTrack
+        case .fileFormat:           return kAudioFilePropertyFileFormat
+        case .dataFormat:           return kAudioFilePropertyDataFormat
+        case .formatList:           return kAudioFilePropertyFormatList
+        case .isOptimized:          return kAudioFilePropertyIsOptimized
+        case .magicCookieData:      return kAudioFilePropertyMagicCookieData
+        case .audioDataByteCount:   return kAudioFilePropertyAudioDataByteCount
+        case .audioDataPacketCount: return kAudioFilePropertyAudioDataPacketCount
+        case .maximumPacketSize:    return kAudioFilePropertyMaximumPacketSize
+        case .dataOffset:           return kAudioFilePropertyDataOffset
+        case .channelLayout:        return kAudioFilePropertyChannelLayout
+        case .deferSizeUpdates:     return kAudioFilePropertyDeferSizeUpdates
+        case .markerList:           return kAudioFilePropertyMarkerList
+        case .regionList:           return kAudioFilePropertyRegionList
+        case .packetToFrame:        return kAudioFilePropertyPacketToFrame
+        case .frameToPacket:        return kAudioFilePropertyFrameToPacket
+        case .packetToByte:         return kAudioFilePropertyPacketToByte
+        case .byteToPacket:         return kAudioFilePropertyByteToPacket
+        case .chunkIDs:             return kAudioFilePropertyChunkIDs
+        case .packetTableInfo:      return kAudioFilePropertyPacketTableInfo
+        case .packetSizeUpperBound: return kAudioFilePropertyPacketSizeUpperBound
+        case .infoDictionary:       return kAudioFilePropertyInfoDictionary
+        case .albumArtwork:         return kAudioFilePropertyAlbumArtwork
+        case .reserveDuration:      return kAudioFilePropertyReserveDuration
+        case .estimatedDuration:    return kAudioFilePropertyEstimatedDuration
+        case .bitRate:              return kAudioFilePropertyBitRate
+        case .id3Tag:               return kAudioFilePropertyID3Tag
+        case .sourceBitDepth:       return kAudioFilePropertySourceBitDepth
+        case .audioTrackCount:      return kAudioFilePropertyAudioTrackCount
+        case .useAudioTrack:        return kAudioFilePropertyUseAudioTrack
         }
     }
     
@@ -157,35 +157,35 @@ public enum AudioFileProperty: CodedPropertyType {
     /// A short description of the property.
     public var shortDescription: String {
         switch self {
-        case .FileFormat:               return "File format"
-        case .DataFormat:               return "Data format"
-        case .FormatList:               return "Format list"
-        case .IsOptimized:              return "Is optimized"
-        case .MagicCookieData:          return "Magic cookie data"
-        case .AudioDataByteCount:       return "Audio data byte count"
-        case .AudioDataPacketCount:     return "Audio data packet count"
-        case .MaximumPacketSize:        return "Maximum packet size"
-        case .DataOffset:               return "Data offset"
-        case .ChannelLayout:            return "Channel layout"
-        case .DeferSizeUpdates:         return "Defer size updates"
-        case .MarkerList:               return "Marker list"
-        case .RegionList:               return "Region list"
-        case .PacketToFrame:            return "Packet to frame"
-        case .FrameToPacket:            return "Frame to packet"
-        case .PacketToByte:             return "Packet to byte"
-        case .ByteToPacket:             return "Byte to packet"
-        case .ChunkIDs:                 return "Chunk IDs"
-        case .PacketTableInfo:          return "Packet table info"
-        case .InfoDictionary:           return "Info dictionary"
-        case .PacketSizeUpperBound:     return "Packet size upper bound"
-        case .ReserveDuration:          return "Reserve duration"
-        case .EstimatedDuration:        return "Estimated duration"
-        case .BitRate:                  return "Bit rate"
-        case .ID3Tag:                   return "ID3 tag"
-        case .SourceBitDepth:           return "Source bit depth"
-        case .AlbumArtwork:             return "Album artwork"
-        case .AudioTrackCount:          return "Audio track count"
-        case .UseAudioTrack:            return "Use audio track"
+        case .fileFormat:               return "File format"
+        case .dataFormat:               return "Data format"
+        case .formatList:               return "Format list"
+        case .isOptimized:              return "Is optimized"
+        case .magicCookieData:          return "Magic cookie data"
+        case .audioDataByteCount:       return "Audio data byte count"
+        case .audioDataPacketCount:     return "Audio data packet count"
+        case .maximumPacketSize:        return "Maximum packet size"
+        case .dataOffset:               return "Data offset"
+        case .channelLayout:            return "Channel layout"
+        case .deferSizeUpdates:         return "Defer size updates"
+        case .markerList:               return "Marker list"
+        case .regionList:               return "Region list"
+        case .packetToFrame:            return "Packet to frame"
+        case .frameToPacket:            return "Frame to packet"
+        case .packetToByte:             return "Packet to byte"
+        case .byteToPacket:             return "Byte to packet"
+        case .chunkIDs:                 return "Chunk IDs"
+        case .packetTableInfo:          return "Packet table info"
+        case .infoDictionary:           return "Info dictionary"
+        case .packetSizeUpperBound:     return "Packet size upper bound"
+        case .reserveDuration:          return "Reserve duration"
+        case .estimatedDuration:        return "Estimated duration"
+        case .bitRate:                  return "Bit rate"
+        case .id3Tag:                   return "ID3 tag"
+        case .sourceBitDepth:           return "Source bit depth"
+        case .albumArtwork:             return "Album artwork"
+        case .audioTrackCount:          return "Audio track count"
+        case .useAudioTrack:            return "Use audio track"
         }
     }
 }

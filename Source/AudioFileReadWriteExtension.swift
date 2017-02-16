@@ -13,9 +13,9 @@ extension AudioFile {
     // MARK: Reading and Writing Data
 
     public func readBytes(
-        numBytes: Int,
+        _ numBytes: Int,
         startingByte: Int,
-        buffer: UnsafeMutablePointer<Void>,
+        buffer: UnsafeMutableRawPointer,
         useCache: Bool = false) throws -> Int {
 
         let inStartingByte = Int64(startingByte)
@@ -34,9 +34,9 @@ extension AudioFile {
     }
 
     public func writeBytes(
-        numBytes: Int,
+        _ numBytes: Int,
         startingByte: Int,
-        buffer: UnsafePointer<Void>,
+        buffer: UnsafeRawPointer,
         useCache: Bool = false) throws -> Int {
         
         var ioNumBytes = UInt32(numBytes)
@@ -55,11 +55,11 @@ extension AudioFile {
     }
 
     public func readPacketData(
-        numBytes: Int,
+        _ numBytes: Int,
         numPackets: Int,
         startingPacket: Int,
         packetDescriptions: UnsafeMutablePointer<AudioStreamPacketDescription>,
-        buffer: UnsafeMutablePointer<Void>,
+        buffer: UnsafeMutableRawPointer,
         useCache: Bool = false) throws -> (bytesRead: Int, packetsRead: Int) {
         
         var ioNumBytes = UInt32(numBytes)
@@ -81,11 +81,11 @@ extension AudioFile {
     }
 
     public func writePackets(
-        numBytes: Int,
+        _ numBytes: Int,
         numPackets: Int,
         startingPacket: Int,
         packetDescriptions: UnsafePointer<AudioStreamPacketDescription>,
-        buffer: UnsafePointer<Void>,
+        buffer: UnsafeRawPointer,
         useCache: Bool = false) throws -> Int {
         
         let inNumBytes = UInt32(numBytes)

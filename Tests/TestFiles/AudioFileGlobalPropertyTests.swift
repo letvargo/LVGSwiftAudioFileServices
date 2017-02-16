@@ -80,7 +80,7 @@ class AudioFileGlobalPropertyTests: XCTestCase {
         XCTAssertTrue(checkCode(kAudioFileGlobalInfo_TypesForMIMEType), "Code error.")
     }
     
-    func checkCode(code: UInt32) -> Bool {
+    func checkCode(_ code: UInt32) -> Bool {
         guard let property = AudioFileGlobalProperty(code: code) else { return false }
         return property.code == code
     }

@@ -10,7 +10,7 @@ import AudioToolbox
 
 extension AudioFile {
     
-    public func countUserData(userDataID: UInt32) throws -> UInt32 {
+    public func countUserData(_ userDataID: UInt32) throws -> UInt32 {
         var count = UInt32.max
         try Error.check(
             AudioFileCountUserData(
@@ -21,7 +21,7 @@ extension AudioFile {
         return count
     }
     
-    public func userDataSize(userDataID: UInt32, index: UInt32) throws -> UInt32 {
+    public func userDataSize(_ userDataID: UInt32, index: UInt32) throws -> UInt32 {
         var size = UInt32.max
         try Error.check(
             AudioFileGetUserDataSize(
@@ -33,7 +33,7 @@ extension AudioFile {
         return size
     }
     
-    public func removeUserData(userDataID: UInt32, index: UInt32) throws {
+    public func removeUserData(_ userDataID: UInt32, index: UInt32) throws {
         try Error.check(
             AudioFileRemoveUserData(
                 self.audioFileID,
@@ -42,7 +42,7 @@ extension AudioFile {
         , message: "An error occurred while removing the user data for userDataID '\(userDataID)', index '\(index)'")
     }
     
-    public func setUserData(userDataID: UInt32, index: UInt32, size: UInt32, userData: UnsafePointer<Void>) throws {
+    public func setUserData(_ userDataID: UInt32, index: UInt32, size: UInt32, userData: UnsafeRawPointer) throws {
         try Error.check(
             AudioFileSetUserData(
                 self.audioFileID,
@@ -53,7 +53,7 @@ extension AudioFile {
         message: "An error occurred while setting the user data for userDataID '\(userDataID)', index '\(index)'")
     }
     
-    public func getUserData(userDataID: UInt32, index: UInt32, inout size: UInt32, buffer: UnsafeMutablePointer<Void>) throws {
+    public func getUserData(_ userDataID: UInt32, index: UInt32, size: inout UInt32, buffer: UnsafeMutableRawPointer) throws {
         try Error.check(
             AudioFileGetUserData(
                 self.audioFileID,

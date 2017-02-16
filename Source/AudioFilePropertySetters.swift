@@ -11,7 +11,7 @@ import AudioToolbox
 
 extension AudioFile {
 
-    private func property<T>(property: AudioFileProperty, value: UnsafePointer<T>, size: UInt32) throws {
+    fileprivate func property<T>(_ property: AudioFileProperty, value: UnsafePointer<T>, size: UInt32) throws {
         try Error.check(
             AudioFileSetProperty(
                 self.audioFileID,
@@ -21,34 +21,34 @@ extension AudioFile {
             message: "An error occurred while setting property '\(property.shortDescription)' to value '\(value)'.")
     }
     
-    public func deferSizeUpdates(deferUpdates: Bool) throws {
+    public func deferSizeUpdates(_ deferUpdates: Bool) throws {
         var shouldDefer: UInt32 = deferUpdates ? 1 : 0
-        let size = UInt32(sizeof(UInt32))
-        try property(.DeferSizeUpdates, value: &shouldDefer, size: size)
+        let size = UInt32(MemoryLayout<UInt32>.size)
+        try property(.deferSizeUpdates, value: &shouldDefer, size: size)
     }
     
-    public func id3Tag(tag: NSData) throws {
-        let size = UInt32(tag.length)
-        try property(.ID3Tag, value: tag.bytes, size: size)
+    public func id3Tag(_ tag: Data) throws {
+        let size = UInt32(tag.count)
+        try property(.id3Tag, value: (tag as NSData).bytes, size: size)
     }
     
-    public func magicCookieData(data: NSData) throws {
-        let size = UInt32(data.length)
-        try property(.MagicCookieData, value: data.bytes, size: size)
+    public func magicCookieData(_ data: Data) throws {
+        let size = UInt32(data.count)
+        try property(.magicCookieData, value: (data as NSData).bytes, size: size)
     }
     
-    public func packetTableInfo(packetTable: AudioFilePacketTableInfo) throws {
-        let size = UInt32(sizeof(AudioFilePacketTableInfo))
-        try property(.PacketTableInfo, value: [packetTable], size: size)
+    public func packetTableInfo(_ packetTable: AudioFilePacketTableInfo) throws {
+        let size = UInt32(MemoryLayout<AudioFilePacketTableInfo>.size)
+        try property(.packetTableInfo, value: [packetTable], size: size)
     }
     
-    public func reserveDuration(duration: Double) throws {
-        let size = UInt32(sizeof(Double))
-        try property(.ReserveDuration, value: [duration], size: size)
+    public func reserveDuration(_ duration: Double) throws {
+        let size = UInt32(MemoryLayout<Double>.size)
+        try property(.reserveDuration, value: [duration], size: size)
     }
     
-    public func useAudioTrack(track: UInt32) throws {
-        let size = UInt32(sizeof(UInt32))
-        try property(.UseAudioTrack, value: [track], size: size)
+    public func useAudioTrack(_ track: UInt32) throws {
+        let size = UInt32(MemoryLayout<UInt32>.size)
+        try property(.useAudioTrack, value: [track], size: size)
     }
 }

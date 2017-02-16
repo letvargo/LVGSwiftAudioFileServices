@@ -12,7 +12,7 @@ extension AudioFile {
 
     /// Retrieve the information for the specified key from the audio file's
     /// info dictionary.
-    public func infoForKey(key: AudioFileInfoKey) throws -> String? {
+    public func infoForKey(_ key: AudioFileInfoKey) throws -> String? {
         return try infoDictionary()[key.code] as? String
     }
 }

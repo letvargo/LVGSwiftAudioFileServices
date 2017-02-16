@@ -14,7 +14,7 @@ extension AudioFile {
     
     public typealias PropertyInfo = (size: UInt32, writable: Bool)
 
-    public func propertyInfo(property: AudioFileProperty) throws -> PropertyInfo {
+    public func propertyInfo(_ property: AudioFileProperty) throws -> PropertyInfo {
         
         var isWritable: UInt32 = 0
         var size: UInt32 = 0
@@ -30,11 +30,11 @@ extension AudioFile {
         return (size, isWritable == 1)
     }
 
-    public func propertySize(property: AudioFileProperty) throws -> UInt32 {
+    public func propertySize(_ property: AudioFileProperty) throws -> UInt32 {
         return try propertyInfo(property).size
     }
 
-    public func propertyIsWritable(property: AudioFileProperty) throws -> Bool {
+    public func propertyIsWritable(_ property: AudioFileProperty) throws -> Bool {
         return try propertyInfo(property).writable
     }
 }

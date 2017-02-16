@@ -9,12 +9,12 @@
 import AudioToolbox
 
 /// A Swift wrapper around Audio File Services' `AudioFileID`.
-public class AudioFile {
+open class AudioFile {
 
     // MARK: AudioFile properties
 
     /// A COpaquePointer that references an `AudioFileID`.
-    public var audioFileID: AudioFileID
+    open var audioFileID: AudioFileID
     
     // MARK: AudioFile initializers
     
@@ -31,7 +31,7 @@ public class AudioFile {
     // MARK: Opening and Closing Audio Files
     
     /// Close the `AudioFile`.
-    public func close() throws {
+    open func close() throws {
         
         try Error.check(
             AudioFileClose(self.audioFileID),
@@ -39,10 +39,10 @@ public class AudioFile {
     }
     
     /// Create an audio file at the provided URL.
-    public func createWithURL(
-        url: NSURL,
+    open func createWithURL(
+        _ url: URL,
         fileType: AudioFileType,
-        inout format: AudioStreamBasicDescription,
+        format: inout AudioStreamBasicDescription,
         flags: AudioFileFlags) throws {
         
         try Error.check(
@@ -57,14 +57,14 @@ public class AudioFile {
     
     /// Erase and initialize an audio file with callbacks for reading
     /// and writing audio data.
-    public func initializeWithCallbacks(
-        inClientData inClientData: UnsafeMutablePointer<Void>,
+    open func initializeWithCallbacks(
+        inClientData: UnsafeMutableRawPointer,
         inReadFunc: AudioFile_ReadProc,
         inWriteFunc: AudioFile_WriteProc,
         inGetSizeFunc: AudioFile_GetSizeProc,
         inSetSizeFunc: AudioFile_SetSizeProc,
         inFileType: AudioFileType,
-        inout inFormat: AudioStreamBasicDescription,
+        inFormat: inout AudioStreamBasicDescription,
         inFlags: AudioFileFlags) throws {
         
         try Error.check(
@@ -102,8 +102,8 @@ public class AudioFile {
      - throws: `AudioFileError`
      
      */
-    public func open(
-        url: NSURL,
+    open func open(
+        _ url: URL,
         permissions: AudioFilePermissions,
         fileTypeHint: AudioFileType? = nil) throws -> AudioFile {
         
@@ -136,8 +136,8 @@ public class AudioFile {
      - returns: The opened `AudioFile` with assigned callbacks.
      - throws: `AudioFileError`
      */
-    public func openWithCallbacks(
-        inClientData inClientData: UnsafeMutablePointer<Void>,
+    open func openWithCallbacks(
+        inClientData: UnsafeMutableRawPointer,
         inReadFunc: AudioFile_ReadProc,
         inWriteFunc: AudioFile_WriteProc?,
         inGetSizeFunc: AudioFile_GetSizeProc,
@@ -160,7 +160,7 @@ public class AudioFile {
 
     // MARK: Optimizing
     
-    public func optimize() throws {
+    open func optimize() throws {
     
         try Error.check(
             AudioFileOptimize(self.audioFileID),

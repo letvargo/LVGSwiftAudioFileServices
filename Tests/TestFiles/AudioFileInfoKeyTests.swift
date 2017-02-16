@@ -40,7 +40,7 @@ class AudioFileInfoKeyTests: XCTestCase {
     func testApproximateDurationInSeconds() {
         do {
             let audioFile = AudioFile()
-            try audioFile.open(NSURL(fileURLWithPath: "/System/Library/Sounds/Frog.aiff"), permissions: .ReadPermission)
+            try audioFile.open(URL(fileURLWithPath: "/System/Library/Sounds/Frog.aiff"), permissions: .readPermission)
             if let value = try audioFile.infoForKey(.ApproximateDurationInSeconds),
                 let duration = Double(value) {
                 XCTAssertNotEqual(duration, 0.0, "Duration was zero")

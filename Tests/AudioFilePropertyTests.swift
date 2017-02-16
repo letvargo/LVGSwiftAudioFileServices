@@ -12,6 +12,8 @@ import AudioToolbox
 
 class AudioFilePropertyTests: XCTestCase {
 
+    let frog = URL(fileURLWithPath: "/System/Library/Sounds/Frog.aiff")
+
     func testCodeInit() {
         XCTAssertEqual(kAudioFilePropertyFileFormat, AudioFileProperty(code: kAudioFilePropertyFileFormat)?.code)
         XCTAssertEqual(kAudioFilePropertyDataFormat, AudioFileProperty(code: kAudioFilePropertyDataFormat)?.code)
@@ -43,5 +45,82 @@ class AudioFilePropertyTests: XCTestCase {
         XCTAssertEqual(kAudioFilePropertyAudioTrackCount, AudioFileProperty(code: kAudioFilePropertyAudioTrackCount)?.code)
         XCTAssertEqual(kAudioFilePropertyUseAudioTrack, AudioFileProperty(code: kAudioFilePropertyUseAudioTrack)?.code)
         XCTAssertNil(AudioFileProperty(code: UInt32.max))
+    }
+    
+    func testSystemSoundArtworkThrowsError() {
+        let audioFile = AudioFile()
+        do {
+            try audioFile.open(frog, permissions: .readPermission)
+            
+            defer {
+                _ = try? audioFile.close()
+            }
+            
+            let artwork = try audioFile.albumArtwork()
+            XCTAssertNil(artwork, "Artwork was not nil.")
+        } catch {
+            switch error {
+            case _ as AudioFileError:
+                break
+            default:
+                print("\(error)")
+                XCTFail("Incorrect error thrown.")
+            }
+        }
+    }
+    
+    // TODO: Test album artwork property with file that contains artwork.
+    
+    func testAudioDataByteCount() {
+        let audioFile = AudioFile()
+        do {
+            try audioFile.open(frog, permissions: .readPermission)
+            
+            defer {
+                _ = try? audioFile.close()
+            }
+            
+            let byteCount = try audioFile.audioDataByteCount()
+            XCTAssertFalse(byteCount == 0, "Byte count was 0.")
+        } catch {
+            print("\(error)")
+            XCTFail("Error thrown")
+        }
+    }
+    
+    func testAudioDataPacketCount() {
+        let audioFile = AudioFile()
+        do {
+            try audioFile.open(frog, permissions: .readPermission)
+            
+            defer {
+                _ = try? audioFile.close()
+            }
+            
+            let packetCount = try audioFile.audioDataPacketCount()
+            XCTAssertFalse(packetCount == 0, "Byte count was 0.")
+        } catch {
+            print("\(error)")
+            XCTFail("Error thrown")
+        }
+    }
+    
+    // TODO: Test audio track count property.
+    
+    func testBitRate() {
+        let audioFile = AudioFile()
+        do {
+            try audioFile.open(frog, permissions: .readPermission)
+            
+            defer {
+                _ = try? audioFile.close()
+            }
+            
+            let value = try audioFile.bitRate()
+            XCTAssertFalse(value == 0, "Byte count was 0.")
+        } catch {
+            print("\(error)")
+            XCTFail("Error thrown")
+        }
     }
 }

@@ -97,7 +97,7 @@ class AudioFileErrorTests: XCTestCase {
         XCTAssertTrue(checkStatus(status), "Wrong error thrown.")
     }
     
-    func checkStatus(status: OSStatus) -> Bool {
+    func checkStatus(_ status: OSStatus) -> Bool {
         do {
             try AudioFileError.check(status, message: "")
             XCTFail("Error not thrown.")

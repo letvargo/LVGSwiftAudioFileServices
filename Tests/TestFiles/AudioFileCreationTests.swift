@@ -27,7 +27,7 @@ class AudioFileCreationTests: XCTestCase {
 
     var audioFile: AudioFile!
     
-    let frog = NSURL(fileURLWithPath: "/System/Library/Sounds/Frog.aiff")
+    let frog = URL(fileURLWithPath: "/System/Library/Sounds/Frog.aiff")
 
     override func setUp() {
         super.setUp()
@@ -48,7 +48,7 @@ class AudioFileCreationTests: XCTestCase {
         
         do {
             
-            try audioFile.open(frog, permissions: .ReadPermission, fileTypeHint: .AIFF)
+            try audioFile.open(frog, permissions: .readPermission, fileTypeHint: .aiff)
             
             XCTAssertNotEqual(audioFile.audioFileID.hashValue, 0, "audioFileID's hashValue was 0 after opening URL.")
         } catch {
@@ -58,8 +58,8 @@ class AudioFileCreationTests: XCTestCase {
     }
     
     func testAudioFileInitFromAudioFileIDIsNot0AfterInit() {
-        var audioFileID: AudioFileID = nil
-        let status = AudioFileOpenURL(frog, .ReadPermission, AudioFileType.AIFF.code, &audioFileID)
+        var audioFileID: AudioFileID? = nil
+        let status = AudioFileOpenURL(frog, .readPermission, AudioFileType.aiff.code, &audioFileID)
         if status != 0 { XCTFail() }
         
         let audioFile = AudioFile(audioFileID: audioFileID)
@@ -71,7 +71,7 @@ class AudioFileCreationTests: XCTestCase {
         
         do {
             
-            try audioFile.open(frog, permissions: .ReadPermission, fileTypeHint: .AIFF)
+            try audioFile.open(frog, permissions: .readPermission, fileTypeHint: .aiff)
             try audioFile.close()
             
             XCTAssertNotEqual(audioFile.audioFileID.hashValue, 0, "audioFileID's hashValue was 0 after opening URL and then closing.")
@@ -83,7 +83,7 @@ class AudioFileCreationTests: XCTestCase {
     
     func testInfoDictionary() {
         do {
-            try audioFile.open(frog, permissions: .ReadPermission, fileTypeHint: .AIFF)
+            try audioFile.open(frog, permissions: .readPermission, fileTypeHint: .aiff)
             _ = try audioFile.infoDictionary()
         } catch {
             print("\(error)")

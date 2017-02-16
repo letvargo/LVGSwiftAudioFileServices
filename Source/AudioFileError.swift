@@ -33,101 +33,101 @@ typealias Error = AudioFileError
 public enum AudioFileError: CodedErrorType {
     
     /// The equivalent of `OSStatus` code `kAudioFileBadPropertySizeError`.
-    case BadPropertySize(message: String)
+    case badPropertySize(message: String)
     
     /// The equivalent of `OSStatus` code `kAudioFileDoesNotAllow64BitDataSizeError`.
-    case DoesNotAllow64BitDataSize(message: String)
+    case doesNotAllow64BitDataSize(message: String)
     
     /// The equivalent of `OSStatus` code `kAudioFileEndOfFileError`.
-    case EndOfFile(message: String)
+    case endOfFile(message: String)
     
     /// The equivalent of `OSStatus` code `kAudioFileFileNotFoundError`.
-    case FileNotFound(message: String)
+    case fileNotFound(message: String)
     
     /// The equivalent of `OSStatus` code `kAudioFileInvalidChunkError`.
-    case InvalidChunk(message: String)
+    case invalidChunk(message: String)
     
     /// The equivalent of `OSStatus` code `kAudioFileInvalidFileError`.
-    case InvalidFile(message: String)
+    case invalidFile(message: String)
     
     /// The equivalent of `OSStatus` code `kAudioFileInvalidPacketOffsetError`.
-    case InvalidPacketOffset(message: String)
+    case invalidPacketOffset(message: String)
     
     /// The equivalent of `OSStatus` code `kAudioFileNotOpenError`.
-    case NotOpen(message: String)
+    case notOpen(message: String)
     
     /// The equivalent of `OSStatus` code `kAudioFileNotOptimizedError`.
-    case NotOptimized(message: String)
+    case notOptimized(message: String)
     
     /// The equivalent of `OSStatus` code `kAudioFileOperationNotSupportedError`.
-    case OperationNotSupported(message: String)
+    case operationNotSupported(message: String)
     
     /// The equivalent of `OSStatus` code `kAudioFilePermissionsError`.
-    case Permissions(message: String)
+    case permissions(message: String)
     
     /// The equivalent of `OSStatus` code `kAudioFilePositionError`.
-    case Position(message: String)
+    case position(message: String)
     
     /// The equivalent of `OSStatus` code `kAudioFileUnspecifiedError`.
-    case Unspecified(message: String)
+    case unspecified(message: String)
     
     /// The equivalent of `OSStatus` code `kAudioFileUnsupportedDataFormatError`.
-    case UnsupportedDataFormat(message: String)
+    case unsupportedDataFormat(message: String)
     
     /// The equivalent of `OSStatus` code `kAudioFileUnsupportedFileTypeError`.
-    case UnsupportedFileType(message: String)
+    case unsupportedFileType(message: String)
     
     /// The equivalent of `OSStatus` code `kAudioFileUnsupportedPropertyError`.
-    case UnsupportedProperty(message: String)
+    case unsupportedProperty(message: String)
     
     /// Created when the `OSStatus` code is not defined by Audio File Services.
-    case Undefined(status: OSStatus, message: String)
+    case undefined(status: OSStatus, message: String)
     
     /// Initializes a `AudioFileError` using a result code
     /// defined by Audio File Services and a message that provides
     /// information about the context from which the error was thrown.
     public init(status: OSStatus, message: String) {
         switch status {
-        case kAudioFileUnspecifiedError:                self = .Unspecified(message: message)
-        case kAudioFileUnsupportedFileTypeError:        self = .UnsupportedFileType(message: message)
-        case kAudioFileUnsupportedDataFormatError:      self = .UnsupportedDataFormat(message: message)
-        case kAudioFileUnsupportedPropertyError:        self = .UnsupportedProperty(message: message)
-        case kAudioFileBadPropertySizeError:            self = .BadPropertySize(message: message)
-        case kAudioFilePermissionsError:                self = .Permissions(message: message)
-        case kAudioFileNotOptimizedError:               self = .NotOptimized(message: message)
-        case kAudioFileInvalidChunkError:               self = .InvalidChunk(message: message)
-        case kAudioFileDoesNotAllow64BitDataSizeError:  self = .DoesNotAllow64BitDataSize(message: message)
-        case kAudioFileInvalidPacketOffsetError:        self = .InvalidPacketOffset(message: message)
-        case kAudioFileInvalidFileError:                self = .InvalidFile(message: message)
-        case kAudioFileOperationNotSupportedError:      self = .OperationNotSupported(message: message)
-        case kAudioFileNotOpenError:                    self = .NotOpen(message: message)
-        case kAudioFileEndOfFileError:                  self = .EndOfFile(message: message)
-        case kAudioFilePositionError:                   self = .Position(message: message)
-        case kAudioFileFileNotFoundError:               self = .FileNotFound(message: message)
-        default:                                        self = .Undefined(status: status, message: message)
+        case kAudioFileUnspecifiedError:                self = .unspecified(message: message)
+        case kAudioFileUnsupportedFileTypeError:        self = .unsupportedFileType(message: message)
+        case kAudioFileUnsupportedDataFormatError:      self = .unsupportedDataFormat(message: message)
+        case kAudioFileUnsupportedPropertyError:        self = .unsupportedProperty(message: message)
+        case kAudioFileBadPropertySizeError:            self = .badPropertySize(message: message)
+        case kAudioFilePermissionsError:                self = .permissions(message: message)
+        case kAudioFileNotOptimizedError:               self = .notOptimized(message: message)
+        case kAudioFileInvalidChunkError:               self = .invalidChunk(message: message)
+        case kAudioFileDoesNotAllow64BitDataSizeError:  self = .doesNotAllow64BitDataSize(message: message)
+        case kAudioFileInvalidPacketOffsetError:        self = .invalidPacketOffset(message: message)
+        case kAudioFileInvalidFileError:                self = .invalidFile(message: message)
+        case kAudioFileOperationNotSupportedError:      self = .operationNotSupported(message: message)
+        case kAudioFileNotOpenError:                    self = .notOpen(message: message)
+        case kAudioFileEndOfFileError:                  self = .endOfFile(message: message)
+        case kAudioFilePositionError:                   self = .position(message: message)
+        case kAudioFileFileNotFoundError:               self = .fileNotFound(message: message)
+        default:                                        self = .undefined(status: status, message: message)
         }
     }
     
     /// The `OSStatus` result code associated with the error.
     public var code: OSStatus {
         switch self {
-        case .Unspecified:                  return kAudioFileUnspecifiedError
-        case .UnsupportedFileType:          return kAudioFileUnsupportedFileTypeError
-        case .UnsupportedDataFormat:        return kAudioFileUnsupportedDataFormatError
-        case .UnsupportedProperty:          return kAudioFileUnsupportedPropertyError
-        case .BadPropertySize:              return kAudioFileBadPropertySizeError
-        case .Permissions:                  return kAudioFilePermissionsError
-        case .NotOptimized:                 return kAudioFileNotOptimizedError
-        case .InvalidChunk:                 return kAudioFileInvalidChunkError
-        case .DoesNotAllow64BitDataSize:    return kAudioFileDoesNotAllow64BitDataSizeError
-        case .InvalidPacketOffset:          return kAudioFileInvalidPacketOffsetError
-        case .InvalidFile:                  return kAudioFileInvalidFileError
-        case .OperationNotSupported:        return kAudioFileOperationNotSupportedError
-        case .NotOpen:                      return kAudioFileNotOpenError
-        case .EndOfFile:                    return kAudioFileEndOfFileError
-        case .Position:                     return kAudioFilePositionError
-        case .FileNotFound:                 return kAudioFileFileNotFoundError
-        case .Undefined(let (status, _)):   return status
+        case .unspecified:                  return kAudioFileUnspecifiedError
+        case .unsupportedFileType:          return kAudioFileUnsupportedFileTypeError
+        case .unsupportedDataFormat:        return kAudioFileUnsupportedDataFormatError
+        case .unsupportedProperty:          return kAudioFileUnsupportedPropertyError
+        case .badPropertySize:              return kAudioFileBadPropertySizeError
+        case .permissions:                  return kAudioFilePermissionsError
+        case .notOptimized:                 return kAudioFileNotOptimizedError
+        case .invalidChunk:                 return kAudioFileInvalidChunkError
+        case .doesNotAllow64BitDataSize:    return kAudioFileDoesNotAllow64BitDataSizeError
+        case .invalidPacketOffset:          return kAudioFileInvalidPacketOffsetError
+        case .invalidFile:                  return kAudioFileInvalidFileError
+        case .operationNotSupported:        return kAudioFileOperationNotSupportedError
+        case .notOpen:                      return kAudioFileNotOpenError
+        case .endOfFile:                    return kAudioFileEndOfFileError
+        case .position:                     return kAudioFilePositionError
+        case .fileNotFound:                 return kAudioFileFileNotFoundError
+        case .undefined(let (status, _)):   return status
         }
     }
     
@@ -139,46 +139,46 @@ public enum AudioFileError: CodedErrorType {
     /// A message that provides information about the context from which the error was thrown.
     public var message: String {
         switch self {
-        case .Unspecified(let m):               return m
-        case .UnsupportedFileType(let m):       return m
-        case .UnsupportedDataFormat(let m):     return m
-        case .UnsupportedProperty(let m):       return m
-        case .BadPropertySize(let m):           return m
-        case .Permissions(let m):               return m
-        case .NotOptimized(let m):              return m
-        case .InvalidChunk(let m):              return m
-        case .DoesNotAllow64BitDataSize(let m): return m
-        case .InvalidPacketOffset(let m):       return m
-        case .InvalidFile(let m):               return m
-        case .OperationNotSupported(let m):     return m
-        case .NotOpen(let m):                   return m
-        case .EndOfFile(let m):                 return m
-        case .Position(let m):                  return m
-        case .FileNotFound(let m):              return m
-        case .Undefined(let (_, m)):            return m
+        case .unspecified(let m):               return m
+        case .unsupportedFileType(let m):       return m
+        case .unsupportedDataFormat(let m):     return m
+        case .unsupportedProperty(let m):       return m
+        case .badPropertySize(let m):           return m
+        case .permissions(let m):               return m
+        case .notOptimized(let m):              return m
+        case .invalidChunk(let m):              return m
+        case .doesNotAllow64BitDataSize(let m): return m
+        case .invalidPacketOffset(let m):       return m
+        case .invalidFile(let m):               return m
+        case .operationNotSupported(let m):     return m
+        case .notOpen(let m):                   return m
+        case .endOfFile(let m):                 return m
+        case .position(let m):                  return m
+        case .fileNotFound(let m):              return m
+        case .undefined(let (_, m)):            return m
         }
     }
     
     /// A short description of the error.
     public var shortDescription: String {
         switch self {
-        case .Unspecified:                  return "Unspecified error."
-        case .UnsupportedFileType:          return "Unsupported file type."
-        case .UnsupportedDataFormat:        return "Unsupported data format."
-        case .UnsupportedProperty:          return "Unsupported property."
-        case .BadPropertySize:              return "Bad property size."
-        case .Permissions:                  return "Invalid permissions."
-        case .NotOptimized:                 return "Not optimized."
-        case .InvalidChunk:                 return "Invalid chunk."
-        case .DoesNotAllow64BitDataSize:    return "Does not allow 64-bit data size."
-        case .InvalidPacketOffset:          return "Invalid packet offset."
-        case .InvalidFile:                  return "Invalid file."
-        case .OperationNotSupported:        return "Operation not supported."
-        case .NotOpen:                      return "File not open."
-        case .EndOfFile:                    return "End of file."
-        case .Position:                     return "Invalid position."
-        case .FileNotFound:                 return "File not found."
-        case .Undefined:                    return "This error is not defined by Audio File Services."
+        case .unspecified:                  return "Unspecified error."
+        case .unsupportedFileType:          return "Unsupported file type."
+        case .unsupportedDataFormat:        return "Unsupported data format."
+        case .unsupportedProperty:          return "Unsupported property."
+        case .badPropertySize:              return "Bad property size."
+        case .permissions:                  return "Invalid permissions."
+        case .notOptimized:                 return "Not optimized."
+        case .invalidChunk:                 return "Invalid chunk."
+        case .doesNotAllow64BitDataSize:    return "Does not allow 64-bit data size."
+        case .invalidPacketOffset:          return "Invalid packet offset."
+        case .invalidFile:                  return "Invalid file."
+        case .operationNotSupported:        return "Operation not supported."
+        case .notOpen:                      return "File not open."
+        case .endOfFile:                    return "End of file."
+        case .position:                     return "Invalid position."
+        case .fileNotFound:                 return "File not found."
+        case .undefined:                    return "This error is not defined by Audio File Services."
         }
     }
 }

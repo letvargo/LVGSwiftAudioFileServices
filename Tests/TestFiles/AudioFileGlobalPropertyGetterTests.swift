@@ -14,7 +14,7 @@ class AudioFileGlobalPropertyGetterTests: XCTestCase {
 
     func testPropertySize() {
         do {
-            let size = try AudioFile.globalPropertySize(.AllExtensions)
+            let size = try AudioFile.globalPropertySize(.allExtensions)
             XCTAssertNotEqual(size, UInt32.max, "Size not returned.")
         } catch {
             print("\(error)")
@@ -68,7 +68,7 @@ class AudioFileGlobalPropertyGetterTests: XCTestCase {
     
     func testAvailableStreamDescriptions() {
         do {
-            let format = AudioFileTypeAndFormatID(mFileType: AudioFileType.AIFF.code, mFormatID: kAudioFormatLinearPCM)
+            let format = AudioFileTypeAndFormatID(mFileType: AudioFileType.aiff.code, mFormatID: kAudioFormatLinearPCM)
             
             let descs = try AudioFile.availableStreamDescriptionsForFormat(format)
             XCTAssertFalse(descs.isEmpty, "Array was empty.")
@@ -80,9 +80,9 @@ class AudioFileGlobalPropertyGetterTests: XCTestCase {
     
     func testAvailableFormatIDs() {
         do {
-            let codes = try AudioFile.availableFormatIDs(.CAF)
+            let codes = try AudioFile.availableFormatIDs(.caf)
             XCTAssertFalse(codes.isEmpty, "Array was empty.")
-            XCTAssertTrue(codes.contains({ $0.codeString! == "aac " }), "Array does not include 'aac ', a known type.")
+            XCTAssertTrue(codes.contains(where: { $0.codeString! == "aac " }), "Array does not include 'aac ', a known type.")
         } catch {
             print("\(error)")
             XCTFail("Error thrown.")
@@ -90,7 +90,7 @@ class AudioFileGlobalPropertyGetterTests: XCTestCase {
     }
     
     func testExtensionsForType() {
-        guard let extensions = try? AudioFile.extensionsForType(.CAF) else {
+        guard let extensions = try? AudioFile.extensionsForType(.caf) else {
             XCTFail("Failed to retrieve the global property.")
             return
         }
@@ -99,7 +99,7 @@ class AudioFileGlobalPropertyGetterTests: XCTestCase {
     }
     
     func testFileTypeName() {
-        guard let name = try? AudioFile.fileTypeName(.CAF) else {
+        guard let name = try? AudioFile.fileTypeName(.caf) else {
             XCTFail("Failed to retrieve the global property.")
             return
         }
@@ -109,17 +109,17 @@ class AudioFileGlobalPropertyGetterTests: XCTestCase {
     }
     
     func testHFSTypeCodesForType() {
-        guard let types = try? AudioFile.HFSTypeCodesForType(.MP3) else {
+        guard let types = try? AudioFile.HFSTypeCodesForType(.mp3) else {
             XCTFail("Failed to retrieve the global property.")
             return
         }
         print(types.map { $0.codeString })
         XCTAssertFalse(types.isEmpty, "Array was empty.")
-        XCTAssertTrue(types.contains({ $0.codeString == "MPG3" }), "Array does not include 'MPG3', a known type.")
+        XCTAssertTrue(types.contains(where: { $0.codeString == "MPG3" }), "Array does not include 'MPG3', a known type.")
     }
     
     func testMIMETypesForType() {
-        guard let types = try? AudioFile.MIMETypesForType(.MP3) else {
+        guard let types = try? AudioFile.MIMETypesForType(.mp3) else {
             XCTFail("Failed to retrieve the global property.")
             return
         }
@@ -133,7 +133,7 @@ class AudioFileGlobalPropertyGetterTests: XCTestCase {
             return
         }
         XCTAssertFalse(types.isEmpty, "Array was empty.")
-        XCTAssertTrue(types.contains({ $0.codeString == "AIFF" }), "Array does not include 'AIFF', a known type.")
+        XCTAssertTrue(types.contains(where: { $0.codeString == "AIFF" }), "Array does not include 'AIFF', a known type.")
     }
     
     func testTypesForExtension() {
@@ -142,7 +142,7 @@ class AudioFileGlobalPropertyGetterTests: XCTestCase {
             return
         }
         XCTAssertFalse(types.isEmpty, "Array was empty.")
-        XCTAssertTrue(types.contains({ $0.codeString == "caff" }), "Array does not include 'caff', a known type.")
+        XCTAssertTrue(types.contains(where: { $0.codeString == "caff" }), "Array does not include 'caff', a known type.")
     }
     
     func testTypesForHFSTypeCode() {
@@ -152,7 +152,7 @@ class AudioFileGlobalPropertyGetterTests: XCTestCase {
             return
         }
         XCTAssertFalse(types.isEmpty, "Array was empty.")
-        XCTAssertTrue(types.contains({ $0.codeString == "MPG3" }), "Array does not include 'MPG3', a known type.")
+        XCTAssertTrue(types.contains(where: { $0.codeString == "MPG3" }), "Array does not include 'MPG3', a known type.")
     }
     
     func testTypesForMIMEType() {
@@ -161,7 +161,7 @@ class AudioFileGlobalPropertyGetterTests: XCTestCase {
                 return
         }
         XCTAssertFalse(types.isEmpty, "Array was empty.")
-        XCTAssertTrue(types.contains({ $0.codeString == "MPG3" }), "Array does not include 'MPG3', a known type.")
+        XCTAssertTrue(types.contains(where: { $0.codeString == "MPG3" }), "Array does not include 'MPG3', a known type.")
     }
     
     func testTypesForUTI() {
@@ -171,11 +171,11 @@ class AudioFileGlobalPropertyGetterTests: XCTestCase {
         }
         print(types.map { $0.codeString })
         XCTAssertFalse(types.isEmpty, "Array was empty.")
-        XCTAssertTrue(types.contains({ $0.codeString == "mp4f" }), "Array does not include 'mp4f', a known type.")
+        XCTAssertTrue(types.contains(where: { $0.codeString == "mp4f" }), "Array does not include 'mp4f', a known type.")
     }
     
     func testUTIsForType() {
-        guard let types = try? AudioFile.UTIsForType(.MPEG4) else {
+        guard let types = try? AudioFile.UTIsForType(.mpeg4) else {
             XCTFail("Failed to retrieve the global property.")
             return
         }
@@ -191,6 +191,6 @@ class AudioFileGlobalPropertyGetterTests: XCTestCase {
         }
         print(types)
         XCTAssertFalse(types.isEmpty, "Array was empty.")
-        XCTAssertTrue(types.contains({ $0.codeString == "caff" }), "Array does not include 'caff', a known type.")
+        XCTAssertTrue(types.contains(where: { $0.codeString == "caff" }), "Array does not include 'caff', a known type.")
     }
 }

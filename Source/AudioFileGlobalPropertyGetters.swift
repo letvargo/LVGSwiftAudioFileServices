@@ -26,9 +26,9 @@ extension AudioFile {
      - throws: `AudioFileError`
      */
     public static func globalPropertySize(
-        property: AudioFileGlobalProperty,
+        _ property: AudioFileGlobalProperty,
         specifierSize: UInt32 = 0,
-        specifier: UnsafeMutablePointer<Void> = nil) throws -> UInt32 {
+        specifier: UnsafeMutableRawPointer? = nil) throws -> UInt32 {
         
         var size: UInt32 = UInt32.max
         try Error.check(
@@ -41,11 +41,11 @@ extension AudioFile {
         return size
     }
     
-    private static func property<T>(
-        property: AudioFileGlobalProperty,
+    fileprivate static func property<T>(
+        _ property: AudioFileGlobalProperty,
         buffer: UnsafeMutablePointer<T>,
         specifierSize: UInt32 = 0,
-        specifier: UnsafeMutablePointer<Void> = nil,
+        specifier: UnsafeMutableRawPointer? = nil,
         size inSize: UInt32? = nil) throws {
         
         var size = try inSize ?? AudioFile.globalPropertySize(property)
@@ -65,7 +65,7 @@ extension AudioFile {
     /// - throws: `AudioFileError`
     public static func allExtensions() throws -> [String] {
         var extensions = NSArray()
-        try AudioFile.property(.AllExtensions, buffer: &extensions)
+        try AudioFile.property(.allExtensions, buffer: &extensions)
         return extensions.flatMap { $0 as? String }
     }
     
@@ -74,9 +74,9 @@ extension AudioFile {
     /// - returns: A `[FourCharCode]` that contains all available HFS type codes.
     /// - throws: `AudioFileError`
     public static func allHFSTypeCodes() throws -> [FourCharCode] {
-        let size = try AudioFile.globalPropertySize(.AllHFSTypeCodes)
-        var codes = [FourCharCode](count: Int(size) / sizeof(FourCharCode), repeatedValue: 0)
-        try property(.AllHFSTypeCodes, buffer: &codes, size: size)
+        let size = try AudioFile.globalPropertySize(.allHFSTypeCodes)
+        var codes = [FourCharCode](repeating: 0, count: Int(size) / sizeof(FourCharCode))
+        try property(.allHFSTypeCodes, buffer: &codes, size: size)
         return codes
     }
     
@@ -86,7 +86,7 @@ extension AudioFile {
     /// - throws: `AudioFileError`
     public static func allMIMETypes() throws -> [String] {
         var types = NSArray()
-        try AudioFile.property(.AllMIMETypes, buffer: &types)
+        try AudioFile.property(.allMIMETypes, buffer: &types)
         return types.flatMap { $0 as? String }
     }
     
@@ -96,7 +96,7 @@ extension AudioFile {
     /// - throws: `AudioFileError`
     public static func allUTIs() throws -> [String] {
         var UTIs = NSArray()
-        try AudioFile.property(.AllUTIs, buffer: &UTIs)
+        try AudioFile.property(.allUTIs, buffer: &UTIs)
         return UTIs.flatMap { $0 as? String }
     }
     
@@ -108,17 +108,17 @@ extension AudioFile {
      - returns: A `[AudioFormatID]` of all format IDs for the specified `AudioFileType`.
      - throws: `AudioFileError`
      */
-    public static func availableFormatIDs(audioFileType: AudioFileType) throws -> [AudioFormatID] {
+    public static func availableFormatIDs(_ audioFileType: AudioFileType) throws -> [AudioFormatID] {
         
         var specifier = audioFileType.code
-        let specifierSize = UInt32(sizeofValue(specifier))
+        let specifierSize = UInt32(MemoryLayout.size(ofValue: specifier))
         let size = try AudioFile.globalPropertySize(
-            .AvailableFormatIDs,
+            .availableFormatIDs,
             specifierSize: specifierSize,
             specifier: &specifier )
-        var formats = [AudioFormatID](count: Int(size) / sizeof(AudioFormatID), repeatedValue: 0)
+        var formats = [AudioFormatID](repeating: 0, count: Int(size) / sizeof(AudioFormatID))
         try AudioFile.property(
-            .AvailableFormatIDs,
+            .availableFormatIDs,
             buffer: &formats,
             specifierSize: specifierSize,
             specifier: &specifier,
@@ -136,19 +136,19 @@ extension AudioFile {
      - throws: `AudioFileError`
      */
     public static func availableStreamDescriptionsForFormat(
-        audioFileTypeAndFormatID: AudioFileTypeAndFormatID) throws -> [AudioStreamBasicDescription] {
+        _ audioFileTypeAndFormatID: AudioFileTypeAndFormatID) throws -> [AudioStreamBasicDescription] {
         
         var specifier = audioFileTypeAndFormatID
-        let specifierSize = UInt32(sizeofValue(specifier))
+        let specifierSize = UInt32(MemoryLayout.size(ofValue: specifier))
         let size = try AudioFile.globalPropertySize(
-            .AvailableStreamDescriptionsForFormat,
+            .availableStreamDescriptionsForFormat,
             specifierSize: specifierSize,
             specifier: &specifier )
         var formats = [AudioStreamBasicDescription](
-            count: Int(size) / sizeof(AudioStreamBasicDescription),
-            repeatedValue: AudioStreamBasicDescription() )
+            repeating: AudioStreamBasicDescription(),
+            count: Int(size) / sizeof(AudioStreamBasicDescription) )
         try AudioFile.property(
-            .AvailableStreamDescriptionsForFormat,
+            .availableStreamDescriptionsForFormat,
             buffer: &formats,
             specifierSize: specifierSize,
             specifier: &specifier,
@@ -164,17 +164,17 @@ extension AudioFile {
      - returns: A `[String]` containing the list of available extensions.
      - throws: `AudioFileError`
      */
-    public static func extensionsForType(audioFileType: AudioFileType) throws -> [String] {
+    public static func extensionsForType(_ audioFileType: AudioFileType) throws -> [String] {
     
         var specifier = audioFileType.code
-        let specifierSize = UInt32(sizeofValue(specifier))
+        let specifierSize = UInt32(MemoryLayout.size(ofValue: specifier))
         let size = try AudioFile.globalPropertySize(
-            .ExtensionsForType,
+            .extensionsForType,
             specifierSize: specifierSize,
             specifier: &specifier )
         var extensions = NSArray()
         try AudioFile.property(
-            .ExtensionsForType,
+            .extensionsForType,
             buffer: &extensions,
             specifierSize: specifierSize,
             specifier: &specifier,
@@ -189,16 +189,16 @@ extension AudioFile {
      - returns: The name of the `AudioFileType`.
      - throws: `AudioFileError`
      */
-    public static func fileTypeName(audioFileType: AudioFileType) throws -> String {
+    public static func fileTypeName(_ audioFileType: AudioFileType) throws -> String {
         var specifier = audioFileType.code
-        let specifierSize = UInt32(sizeofValue(specifier))
+        let specifierSize = UInt32(MemoryLayout.size(ofValue: specifier))
         let size = try AudioFile.globalPropertySize(
-            .FileTypeName,
+            .fileTypeName,
             specifierSize: specifierSize,
             specifier: &specifier )
         var typeName: NSString = NSString(string: "")
         try AudioFile.property(
-                .FileTypeName,
+                .fileTypeName,
                 buffer: &typeName,
                 specifierSize: specifierSize,
                 specifier: &specifier,
@@ -214,16 +214,16 @@ extension AudioFile {
      for the specified `AudioFileType`.
      - throws: `AudioFileError`
      */
-    public static func HFSTypeCodesForType(audioFileType: AudioFileType) throws -> [FourCharCode] {
+    public static func HFSTypeCodesForType(_ audioFileType: AudioFileType) throws -> [FourCharCode] {
         var specifier = audioFileType.code
-        let specifierSize = UInt32(sizeofValue(specifier))
+        let specifierSize = UInt32(MemoryLayout.size(ofValue: specifier))
         let size = try AudioFile.globalPropertySize(
-            .HFSTypeCodesForType,
+            .hfsTypeCodesForType,
             specifierSize: specifierSize,
             specifier: &specifier )
-        var codes = [FourCharCode](count: Int(size) / sizeof(FourCharCode), repeatedValue: 0)
+        var codes = [FourCharCode](repeating: 0, count: Int(size) / sizeof(FourCharCode))
         try AudioFile.property(
-            .HFSTypeCodesForType,
+            .hfsTypeCodesForType,
             buffer: &codes,
             specifierSize: specifierSize,
             specifier: &specifier,
@@ -239,16 +239,16 @@ extension AudioFile {
      for the specified `AudioFileType`.
      - throws: `AudioFileError`
      */
-    public static func MIMETypesForType(audioFileType: AudioFileType) throws -> [String] {
+    public static func MIMETypesForType(_ audioFileType: AudioFileType) throws -> [String] {
         var specifier = audioFileType.code
-        let specifierSize = UInt32(sizeofValue(specifier))
+        let specifierSize = UInt32(MemoryLayout.size(ofValue: specifier))
         let size = try AudioFile.globalPropertySize(
-            .MIMETypesForType,
+            .mimeTypesForType,
             specifierSize: specifierSize,
             specifier: &specifier)
         var types = NSArray()
         try AudioFile.property(
-            .MIMETypesForType,
+            .mimeTypesForType,
             buffer: &types,
             specifierSize: specifierSize,
             specifier: &specifier,
@@ -263,9 +263,9 @@ extension AudioFile {
      - throws: `AudioFileError`
      */
     public static func readableTypes() throws -> [AudioFileTypeID] {
-        let size = try AudioFile.globalPropertySize(.ReadableTypes)
-        var types = [AudioFileTypeID](count: Int(size) / sizeof(AudioFileTypeID), repeatedValue: 0)
-        try AudioFile.property(.ReadableTypes, buffer: &types, size: size)
+        let size = try AudioFile.globalPropertySize(.readableTypes)
+        var types = [AudioFileTypeID](repeating: 0, count: Int(size) / sizeof(AudioFileTypeID))
+        try AudioFile.property(.readableTypes, buffer: &types, size: size)
         return types
     }
     
@@ -276,16 +276,16 @@ extension AudioFile {
      - returns: A `[AudioFileTypeID]` containing all available file types.
      - throws: `AudioFileError`
      */
-    public static func typesForExtension(ext: String) throws -> [AudioFileTypeID] {
+    public static func typesForExtension(_ ext: String) throws -> [AudioFileTypeID] {
         var specifier = NSString(string: ext)
-        let specifierSize = UInt32(sizeofValue(specifier))
+        let specifierSize = UInt32(MemoryLayout.size(ofValue: specifier))
         let size = try AudioFile.globalPropertySize(
-            .TypesForExtension,
+            .typesForExtension,
             specifierSize: specifierSize,
             specifier: &specifier )
-        var types = [AudioFileTypeID](count: Int(size) / sizeof(AudioFileTypeID), repeatedValue: 0)
+        var types = [AudioFileTypeID](repeating: 0, count: Int(size) / sizeof(AudioFileTypeID))
         try AudioFile.property(
-            .TypesForExtension,
+            .typesForExtension,
             buffer: &types,
             specifierSize: specifierSize,
             specifier: &specifier,
@@ -300,16 +300,16 @@ extension AudioFile {
      - returns: A `[AudioFileTypeID]` containing all available file types.
      - throws: `AudioFileError`
      */
-    public static func typesForHFSTypeCode(code: FourCharCode) throws -> [AudioFileTypeID] {
+    public static func typesForHFSTypeCode(_ code: FourCharCode) throws -> [AudioFileTypeID] {
         var specifier = code
-        let specifierSize = UInt32(sizeofValue(specifier))
+        let specifierSize = UInt32(MemoryLayout.size(ofValue: specifier))
         let size = try AudioFile.globalPropertySize(
-            .TypesForHFSTypeCode,
+            .typesForHFSTypeCode,
             specifierSize: specifierSize,
             specifier: &specifier )
-        var types = [AudioFileTypeID](count: Int(size) / sizeof(AudioFileTypeID), repeatedValue: 0)
+        var types = [AudioFileTypeID](repeating: 0, count: Int(size) / sizeof(AudioFileTypeID))
         try AudioFile.property(
-            .TypesForHFSTypeCode,
+            .typesForHFSTypeCode,
             buffer: &types,
             specifierSize: specifierSize,
             specifier: &specifier,
@@ -324,16 +324,16 @@ extension AudioFile {
      - returns: A `[AudioFileTypeID]` containing all available file types.
      - throws: `AudioFileError`
      */
-    public static func typesForMIMEType(type: String) throws -> [AudioFileTypeID] {
+    public static func typesForMIMEType(_ type: String) throws -> [AudioFileTypeID] {
         var specifier = NSString(string: type)
-        let specifierSize = UInt32(sizeofValue(specifier))
+        let specifierSize = UInt32(MemoryLayout.size(ofValue: specifier))
         let size = try AudioFile.globalPropertySize(
-            .TypesForMIMEType,
+            .typesForMIMEType,
             specifierSize: specifierSize,
             specifier: &specifier )
-        var types = [AudioFileTypeID](count: Int(size) / sizeof(AudioFileTypeID), repeatedValue: 0)
+        var types = [AudioFileTypeID](repeating: 0, count: Int(size) / sizeof(AudioFileTypeID))
         try AudioFile.property(
-            .TypesForMIMEType,
+            .typesForMIMEType,
             buffer: &types,
             specifierSize: specifierSize,
             specifier: &specifier,
@@ -348,16 +348,16 @@ extension AudioFile {
      - returns: A `[AudioFileTypeID]` containing all available file types.
      - throws: `AudioFileError`
      */
-    public static func typesForUTI(UTI: String) throws -> [AudioFileTypeID] {
+    public static func typesForUTI(_ UTI: String) throws -> [AudioFileTypeID] {
         var specifier = NSString(string: UTI)
-        let specifierSize = UInt32(sizeofValue(specifier))
+        let specifierSize = UInt32(MemoryLayout.size(ofValue: specifier))
         let size = try AudioFile.globalPropertySize(
-            .TypesForUTI,
+            .typesForUTI,
             specifierSize: specifierSize,
             specifier: &specifier )
-        var types = [AudioFileTypeID](count: Int(size) / sizeof(AudioFileTypeID), repeatedValue: 0)
+        var types = [AudioFileTypeID](repeating: 0, count: Int(size) / sizeof(AudioFileTypeID))
         try AudioFile.property(
-            .TypesForUTI,
+            .typesForUTI,
             buffer: &types,
             specifierSize: specifierSize,
             specifier: &specifier,
@@ -372,16 +372,16 @@ extension AudioFile {
      - returns: A `[String]` containing all available UTIs.
      - throws: `AudioFileError`
      */
-    public static func UTIsForType(audioFileType: AudioFileType) throws -> [String] {
+    public static func UTIsForType(_ audioFileType: AudioFileType) throws -> [String] {
         var specifier = audioFileType.code
-        let specifierSize = UInt32(sizeofValue(specifier))
+        let specifierSize = UInt32(MemoryLayout.size(ofValue: specifier))
         let size = try AudioFile.globalPropertySize(
-            .UTIsForType,
+            .utisForType,
             specifierSize: specifierSize,
             specifier: &specifier)
         var UTIs = NSArray()
         try AudioFile.property(
-            .UTIsForType,
+            .utisForType,
             buffer: &UTIs,
             specifierSize:
             specifierSize,
@@ -396,9 +396,9 @@ extension AudioFile {
      - returns: A `[AudioFileTypeID]` containing all writable file types.
      - throws: `AudioFileError`
      */    public static func writableTypes() throws -> [AudioFileTypeID] {
-        let size = try AudioFile.globalPropertySize(.WritableTypes)
-        var types = [AudioFileTypeID](count: Int(size) / sizeof(AudioFileTypeID), repeatedValue: 0)
-        try AudioFile.property(.WritableTypes, buffer: &types, size: size)
+        let size = try AudioFile.globalPropertySize(.writableTypes)
+        var types = [AudioFileTypeID](repeating: 0, count: Int(size) / sizeof(AudioFileTypeID))
+        try AudioFile.property(.writableTypes, buffer: &types, size: size)
         return types
     }
 }
