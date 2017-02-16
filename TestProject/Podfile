@@ -8,7 +8,7 @@ target 'Tests-iOS' do
     pod 'LVGSwiftAudioFileServices', :path => '../'
 end
 
-target 'Tests-OSX' do
+target 'Tests-macOS’ do
     platform :osx, '10.10'
     pod 'LVGSwiftAudioFileServices', :path => '../'
 end
