@@ -10,9 +10,6 @@ import Foundation
 import AudioToolbox
 import LVGUtilities
 
-// Internally, Error can be used as a shortname for AudioFileError
-typealias Error = AudioFileError
-
 /**
  
  An enum with cases that represent the `OSStatus` result codes defined by 
