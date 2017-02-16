@@ -60,6 +60,7 @@
 		57EF8ECD1E55C38B0067291F = {
 			isa = PBXGroup;
 			children = (
+				57EF8EED1E55CAA70067291F /* Tests-common */,
 				57EF8EDA1E55C3C10067291F /* Tests-macOS */,
 				57EF8EE61E55C3E40067291F /* Tests-iOS */,
 				57EF8ED91E55C3C10067291F /* Products */,
@@ -93,6 +94,13 @@
 				57EF8EE91E55C3E40067291F /* Info.plist */,
 			);
 			path = "Tests-iOS";
+			sourceTree = "<group>";
+		};
+		57EF8EED1E55CAA70067291F /* Tests-common */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = "Tests-common";
 			sourceTree = "<group>";
 		};
 		A1C423B083BE217649B8D7CB /* Pods */ = {
@@ -560,6 +568,7 @@
 				57EF8EE01E55C3C10067291F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		57EF8EEA1E55C3E40067291F /* Build configuration list for PBXNativeTarget "Tests-iOS" */ = {
 			isa = XCConfigurationList;
@@ -568,6 +577,7 @@
 				57EF8EEC1E55C3E40067291F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
