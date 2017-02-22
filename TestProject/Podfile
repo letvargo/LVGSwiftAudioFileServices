@@ -1,8 +1,5 @@
 use_frameworks!
 
-install! 'cocoapods',
-    :deterministic_uuids => false
-
 target 'Tests-iOS' do
     platform :ios, '8.0'
     pod 'LVGSwiftAudioFileServices', :path => '../'
