@@ -2,11 +2,7 @@
 //  Tests_macOS.swift
 //  Tests-macOS
 //
-<<<<<<< HEAD
-//  Created by doof nugget on 2/16/17.
-=======
 //  Created by Aaron Rasmussen on 2/22/17.
->>>>>>> development
 //
 //
 

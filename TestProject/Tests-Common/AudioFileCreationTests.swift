@@ -27,10 +27,42 @@ class AudioFileCreationTests: XCTestCase {
     
     let frog = URL(fileURLWithPath: "/System/Library/Sounds/Frog.aiff")
     
-    func testInitFromURL() {
-        let permissions = AudioFilePermissions.readPermission
+    func testOpenFromURL() {
+        
         do {
-            let _ = try AudioFile(url: frog, permissions: permissions)
+            let _ = try AudioFile(openAtURL: frog, permissions: AudioFilePermissions.readPermission)
+        } catch {
+            XCTFail("\(error)")
+        }
+    }
+    
+    func testCreateAtURL() {
+        let url = URL(fileURLWithPath: "/Users/aaron/Documents/tmp.caf")
+        var desc = AudioStreamBasicDescription()
+        desc.mFormatFlags = kAudioFormatFlagIsBigEndian |
+            kAudioFormatFlagIsSignedInteger | kAudioFormatFlagIsPacked
+        desc.mSampleRate = 441000
+        desc.mFormatID = kAudioFormatLinearPCM
+        desc.mBitsPerChannel = 16
+        desc.mChannelsPerFrame = 1
+        desc.mFramesPerPacket = 1
+        desc.mBytesPerFrame = 2
+        desc.mBytesPerPacket = 2
+        
+        do {
+            
+            let _ = try AudioFile(createAtURL: url, fileType: .caf, format: &desc, flags: [AudioFileFlags.eraseFile])
+            
+            defer {
+                
+                let fileManager = FileManager.default
+                
+                do {
+                    try fileManager.removeItem(at: url)
+                } catch {
+                    print("\(error)")
+                }
+            }
         } catch {
             XCTFail("\(error)")
         }

@@ -11,30 +11,12 @@ import AudioToolbox
 /// A Swift wrapper around Audio File Services' `AudioFileID`.
 public class AudioFile {
 
-    // MARK: AudioFile properties
-
     /// An OpaquePointer that references an `AudioFileID`.
     fileprivate var audioFileID: AudioFileID?
     
-    // MARK: AudioFile initializers
-    
-//    /// Initialize an `AudioFile` with an empty `AudioFileID`.
-//    public convenience init() {
-//        self.init(audioFileID: nil)
-//    }
-    
-    /// Initialize an `AudioFile` with the provided `AudioFileID`.
-    public init(audioFileID: AudioFileID) {
-        self.audioFileID = audioFileID
-    }
-    
     /**
      
-     Open an audio file at the provided URL.
-     
-     This method returns `self` to allow for method chaining:
-     
-     let audioFile = try AudioFile().open(myURL, permissions: .ReadPermissions)
+     Initialize an AudioFile by opening the file at the provided URL.
      
      - parameters:
      - url: The URL of the file you wish to open.
@@ -43,14 +25,11 @@ public class AudioFile {
      The default value is `nil` and this should be used if you do not know
      the file type.
      
-     - returns: This method opens the file and returns `self` in order to
-     allow method chaining.
-     
      - throws: `AudioFileError`
      
      */
     public init(
-        url: URL,
+        openAtURL url: URL,
         permissions: AudioFilePermissions,
         fileTypeHint: AudioFileType? = nil) throws {
         
@@ -63,37 +42,33 @@ public class AudioFile {
                 fileTypeHint?.code ?? 0,
                 &self.audioFileID),
             message: "Failed to open file at url \(url).")
-        
-        
     }
     
-//    // MARK: Opening and Closing Audio Files
-//    
+    /// Initialize an AudioFile by creating a new file at the provided URL.
+    public init(
+        createAtURL url: URL,
+        fileType: AudioFileType,
+        format: inout AudioStreamBasicDescription,
+        flags: AudioFileFlags) throws {
+        
+        try AudioFileError.check(
+            AudioFileCreateWithURL(
+                url as CFURL,
+                fileType.code,
+                &format,
+                flags,
+                &self.audioFileID),
+            message: "Failed to create file at url \(url).")
+    }
+//
 //    /// Close the `AudioFile`.
-//    open func close() throws {
-//        
+//    public func close() throws {
+//
 //        try AudioFileError.check(
-//            AudioFileClose(self.audioFileID),
+//            AudioFileClose(self.audioFileID!),
 //            message: "Failed to close file.")
 //    }
-//    
-//    /// Create an audio file at the provided URL.
-//    open func createWithURL(
-//        _ url: URL,
-//        fileType: AudioFileType,
-//        format: inout AudioStreamBasicDescription,
-//        flags: AudioFileFlags) throws {
-//        
-//        try Error.check(
-//            AudioFileCreateWithURL(
-//                url,
-//                fileType.code,
-//                &format,
-//                flags,
-//                &self.audioFileID),
-//            message: "Failed to create file at url \(url).")
-//    }
-//    
+//
 //    /// Erase and initialize an audio file with callbacks for reading
 //    /// and writing audio data.
 //    open func initializeWithCallbacks(
