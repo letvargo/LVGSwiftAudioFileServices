@@ -37,7 +37,9 @@ class AudioFileCreationTests: XCTestCase {
     }
     
     func testCreateAtURL() {
-        let url = URL(fileURLWithPath: "/Users/aaron/Documents/tmp.caf")
+        let fileManager = FileManager.default
+        let baseURL = fileManager.temporaryDirectory
+        let url = baseURL.appendingPathComponent("tmp.caf")
         var desc = AudioStreamBasicDescription()
         desc.mFormatFlags = kAudioFormatFlagIsBigEndian |
             kAudioFormatFlagIsSignedInteger | kAudioFormatFlagIsPacked
@@ -55,7 +57,6 @@ class AudioFileCreationTests: XCTestCase {
             
             defer {
                 
-                let fileManager = FileManager.default
                 
                 do {
                     try fileManager.removeItem(at: url)
